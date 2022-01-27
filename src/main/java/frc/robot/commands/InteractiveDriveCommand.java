@@ -17,6 +17,7 @@ public class InteractiveDriveCommand extends CommandBase {
         m_climber = climber;
         
         addRequirements(shooter);
+        addRequirements(climber);
     }
 
     @Override

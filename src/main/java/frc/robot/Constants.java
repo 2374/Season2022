@@ -20,10 +20,19 @@ public final class Constants {
     public static final int RIGHT_SHOOTER = 6;
     public static final int XBOX_CONTROLLER_PORT = 0;
     public static final int CONTROLLER_PORT = 0;
-    public static final int FRONT_RIGHT_CLIMBER_PORT  = -1;
-    public static final int FRONT_LEFT_CLIMBER_PORT  = -1;
-    public static final int BACK_RIGHT_CLIMBER_PORT  = -1;
-    public static final int BACK_LEFT_CLIMBER_PORT  = -1;
+
+    public static final int LEFT_ARTICULATING_MOTOR = 17;
+    public static final int RIGHT_ARTICULATING_MOTOR = 18;
+    public static final int LEFT_FIXED_MOTOR = 15;
+    public static final int RIGHT_FIXED_MOTOR = 16;
+
     public static final PneumaticsModuleType PCM1 = null;
     public static final PneumaticsModuleType PCM2 = null;
+    public static final PneumaticsModuleType PCM = null;
+
+    public static int FIXED_ARM_UPPER_LIMIT = 200;
+    public static int FIXED_ARM_LOWER_LIMIT = 0;
+
+    public static int FORWARD_CHANNEL = 0;
+    public static int REVERSE_CHANNEL = 0;
 }

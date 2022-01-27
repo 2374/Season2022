@@ -7,10 +7,12 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ClimberSubsystem {
+public class ClimberSubsystem extends SubsystemBase {
 
     public WPI_TalonFX leftFixed;
     public WPI_TalonFX rightFixed;
@@ -21,7 +23,8 @@ public class ClimberSubsystem {
     public DoubleSolenoid leftPiston;
     public DoubleSolenoid rightPiston;
 
-    public MotorControllerGroup mainGroup;
+    public MotorControllerGroup fixedGroup;
+    public MotorControllerGroup articulatingGroup;
     
     private ClimberSubsystem instance;
     // public TalonFX rightFrontMotor;
@@ -44,10 +47,11 @@ public class ClimberSubsystem {
         rightArticulating.setNeutralMode(NeutralMode.Brake);
 
         compressor = new Compressor(Constants.PCM);
-        leftPiston = new DoubleSolenoid(module, moduleType, forwardChannel, reverseChannel);
-        rightPiston = new DoubleSolenoid(module, moduleType, forwardChannel, reverseChannel);
-
-        mainGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
+        leftPiston = new DoubleSolenoid(30, ModuleType.kCTRE, Constants.FORWARD_CHANNEL, reverseChannel);
+        rightPiston = new DoubleSolenoid(30, ModuleType.kCTRE, Constants.FORWARD_CHANNEL, reverseChannel);
+d
+        fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
+        articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
         // rightFrontMotor = new TalonFX(Constants.FRONT_RIGHT_CLIMBER_PORT);
         // rightBackMotor = new TalonFX(Constants.BACK_RIGHT_CLIMBER_PORT);
 
@@ -64,11 +68,20 @@ public class ClimberSubsystem {
         
         return instance;
     }
-    public void retract() {
-        mainGroup.set(-0.1);
+
+    public void extendFixedArms(){
+        if (leftFixed.getSelectedSensorPosition() <= Constants.FIXED_ARM_UPPER_LIMIT){
+            fixedGroup.set(0.1);
+        } else {
+            fixedGroup.set(0);
+        }
     }
 
-    public void stop() {
-        mainGroup.set(0.0);
+    public void retractFixedArms(){
+        if (leftFixed.getSelectedSensorPosition() >= Constants.FIXED_ARM_LOWER_LIMIT) {
+            fixedGroup.set(-0.1);
+        } else {
+            fixedGroup.set(0);
+        }
     }
 }
