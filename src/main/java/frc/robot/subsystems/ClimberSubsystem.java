@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -47,9 +47,11 @@ public class ClimberSubsystem extends SubsystemBase {
         rightArticulating.setNeutralMode(NeutralMode.Brake);
 
         compressor = new Compressor(Constants.PCM);
-        leftPiston = new DoubleSolenoid(30, ModuleType.kCTRE, Constants.FORWARD_CHANNEL, reverseChannel);
-        rightPiston = new DoubleSolenoid(30, ModuleType.kCTRE, Constants.FORWARD_CHANNEL, reverseChannel);
-d
+
+    
+        leftPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
+
+        rightPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
         fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
         articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
         // rightFrontMotor = new TalonFX(Constants.FRONT_RIGHT_CLIMBER_PORT);
