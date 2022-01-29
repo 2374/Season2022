@@ -23,6 +23,10 @@ public class ExampleCommand extends CommandBase {
     addRequirements(subsystem);
   }
 
+  public ExampleSubsystem getM_subsystem() {
+    return m_subsystem;
+  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
