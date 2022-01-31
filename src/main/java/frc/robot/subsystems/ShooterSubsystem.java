@@ -1,21 +1,21 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+//import com.ctre.phoenix.motorcontrol.NeutralMode;
+//import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+//import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 // talons are FX
 
 public class ShooterSubsystem extends SubsystemBase {
-    private WPI_TalonSRX leftMotor;
-    private WPI_TalonSRX rightMotor;
+    private WPI_TalonFX leftMotor;
+    private WPI_TalonFX rightMotor;
 
 
     private MotorControllerGroup mainGroup;
@@ -23,8 +23,8 @@ public class ShooterSubsystem extends SubsystemBase {
     private ShooterSubsystem instance;
 
     public ShooterSubsystem() {
-        leftMotor = new WPI_TalonSRX(Constants.LEFT_SHOOTER);
-        rightMotor = new WPI_TalonSRX(Constants.RIGHT_SHOOTER);
+        leftMotor = new WPI_TalonFX(Constants.LEFT_SHOOTER);
+        rightMotor = new WPI_TalonFX(Constants.RIGHT_SHOOTER);
         
 
         rightMotor.setInverted(true);

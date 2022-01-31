@@ -32,7 +32,11 @@ public final class Constants {
 
     public static int FIXED_ARM_UPPER_LIMIT = 200;
     public static int FIXED_ARM_LOWER_LIMIT = 0;
+    public static int ARTICULATING_ARM_UPPER_LIMIT = 200;
+    public static int ARTICULATING_ARM_LOWER_LIMIT = 0;
 
-    public static int FORWARD_CHANNEL = 0;
-    public static int REVERSE_CHANNEL = 0;
+	public static final double LIMELIGHT_TOLERANCE = 0.03;
+
+    public static int FORWARD_CHANNEL = 2000;
+    public static int REVERSE_CHANNEL = 2000;
 }

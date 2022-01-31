@@ -1,12 +1,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -47,11 +45,11 @@ public class ClimberSubsystem extends SubsystemBase {
         rightArticulating.setNeutralMode(NeutralMode.Brake);
 
         compressor = new Compressor(Constants.PCM);
-
     
         leftPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
-
         rightPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
+        leftPiston.set(DoubleSolenoid.Value.kOff);
+        rightPiston.set(DoubleSolenoid.Value.kOff);
         fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
         articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
         // rightFrontMotor = new TalonFX(Constants.FRONT_RIGHT_CLIMBER_PORT);
@@ -73,7 +71,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     public void extendFixedArms(){
         if (leftFixed.getSelectedSensorPosition() <= Constants.FIXED_ARM_UPPER_LIMIT){
-            fixedGroup.set(0.1);
+            fixedGroup.set(0.4);
         } else {
             fixedGroup.set(0);
         }
@@ -81,9 +79,52 @@ public class ClimberSubsystem extends SubsystemBase {
 
     public void retractFixedArms(){
         if (leftFixed.getSelectedSensorPosition() >= Constants.FIXED_ARM_LOWER_LIMIT) {
-            fixedGroup.set(-0.1);
+            fixedGroup.set(-1.0);
         } else {
             fixedGroup.set(0);
         }
+    
     }
+
+    public void extendArticulatingArms(){
+        if (leftArticulating.getSelectedSensorPosition() <= Constants.ARTICULATING_ARM_UPPER_LIMIT) {
+            articulatingGroup.set(0.1);
+        } else {
+            articulatingGroup.set(0);
+        }
+    }
+
+    public void retractArticulatingArms(){
+        if (leftArticulating.getSelectedSensorPosition() >= Constants.ARTICULATING_ARM_UPPER_LIMIT) {
+            articulatingGroup.set(-0.1);
+        } else {
+            articulatingGroup.set(0);
+        }
+    }
+
+    // moves articulating arms forward
+    public void angleArticulatingArms() {
+        leftPiston.set(DoubleSolenoid.Value.kForward);
+        rightPiston.set(DoubleSolenoid.Value.kForward);
+    }
+
+    // moves articulating arms in reverse
+    public void reverseArticulatingArms() {
+        leftPiston.set(DoubleSolenoid.Value.kReverse);
+        rightPiston.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void stopPistons() {
+        leftPiston.set(DoubleSolenoid.Value.kOff);
+        rightPiston.set(DoubleSolenoid.Value.kOff);
+    } 
+    
+    public void stopFixedArms(){
+        fixedGroup.set(0);
+    }
+
+    public void stopArticulatingArms() {
+        articulatingGroup.set(0);
+    }
+
 }

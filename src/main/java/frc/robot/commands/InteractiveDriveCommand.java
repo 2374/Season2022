@@ -32,7 +32,7 @@ public class InteractiveDriveCommand extends CommandBase {
         if (xbox.getBButton()) {
             m_climber.retractFixedArms();
         } else {
-            m_climber.stop();
+            m_climber.stopFixedArms();
         }
         
     
