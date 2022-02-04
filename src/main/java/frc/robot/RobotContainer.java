@@ -23,7 +23,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  private final InteractiveDriveCommand drivetrainCommand = new InteractiveDriveCommand(m_shooterSubsystem, m_climberSubsystem);
+  private final InteractiveDriveCommand drivetrainCommand = new InteractiveDriveCommand(/*m_shooterSubsystem,*/ m_climberSubsystem);
 
   /*
   jdhdajvjdkjdhfduiuceiygiufryugfeyugdsnjfdsakjjdasdsajdksalkfekisldalansfdoankjffsugsnvjsndoijakjdkjskjhdsakjhsjqwkjshdaoiupwmjoidadlksafcm fknfdabchsanbjalkdsn
@@ -65,7 +65,8 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    m_shooterSubsystem.setDefaultCommand(drivetrainCommand);
+    //add for shooter subsystem
+    m_climberSubsystem.setDefaultCommand(drivetrainCommand);
   }
 
   /**

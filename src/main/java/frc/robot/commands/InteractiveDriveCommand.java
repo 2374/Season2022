@@ -12,30 +12,31 @@ public class InteractiveDriveCommand extends CommandBase {
     private XboxController xbox = new XboxController(Constants.XBOX_CONTROLLER_PORT);
     
 
-    public InteractiveDriveCommand(ShooterSubsystem shooter, ClimberSubsystem climber) {
-        m_shooter = shooter;
+    public InteractiveDriveCommand(/* ShooterSubsystem shooter,*/ ClimberSubsystem climber) {
+        // m_shooter = shooter;
         m_climber = climber;
         
-        addRequirements(shooter);
+        // addRequirements(shooter);
         addRequirements(climber);
     }
 
     @Override
     public void execute() {
 
-        if (xbox.getAButton()) {
+        /* if (xbox.getAButton()) {
             m_shooter.shoot();
         } else {
             m_shooter.stop();
-        }
+        } */
 
         if (xbox.getBButton()) {
-            m_climber.retract();
+            m_climber.extendFixedArms();
+        } else if (xbox.getAButton()) {
+            m_climber.retractFixedArms();
         } else {
-            m_climber.stop();
+            m_climber.stopFixedGroup();
         }
         
-    
     }
         
     }

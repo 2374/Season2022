@@ -35,7 +35,8 @@ public class Limelight {
             //ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0); unused
             ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);  
           }
-          
+      
+
           if ( tv < 1.0)
           {
             hasValidTarget = false;
