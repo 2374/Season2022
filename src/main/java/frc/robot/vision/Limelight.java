@@ -3,6 +3,8 @@ package frc.robot.vision;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.Constants;
 
+// Limelight? ... More like Lemondark.
+
 public class Limelight {
 
     private boolean hasValidTarget = false;
@@ -11,9 +13,11 @@ public class Limelight {
     private double verticalTargetAngle = 0.0;
     private double horizontalTargetAngle = 0.0;
 
-    static final double LIMELIGHT_HEIGHT_CM = 56.5; //h1
-    static final double TARGET_HEIGHT_CM = 206.0; //h2
-    static final double LIMELIGHT_MOUNTING_ANGLE = 16.0; //a1
+    // Impossible. Hybrid on Aiur! It is they who have been leading the zerg!
+
+    static final double LIMELIGHT_HEIGHT_CM = 60.0; // h1
+    static final double TARGET_HEIGHT_CM = 171.0; // h2
+    static final double LIMELIGHT_MOUNTING_ANGLE = 60; // a1
     
     public void updateTracking() {
 

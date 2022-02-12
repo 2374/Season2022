@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+// Does whatever a spider can
+
 public class ClimberSubsystem extends SubsystemBase {
 
     public WPI_TalonFX leftFixed;
@@ -21,17 +23,12 @@ public class ClimberSubsystem extends SubsystemBase {
     public DoubleSolenoid leftPiston;
     public DoubleSolenoid rightPiston;
 
+    // You feel your sins climbing on your back
+
     public MotorControllerGroup fixedGroup;
     public MotorControllerGroup articulatingGroup;
     
     private ClimberSubsystem instance;
-    // public TalonFX rightFrontMotor;
-    // public TalonFX rightBackMotor;
-
-    
-
-    // public Solenoid leftSolenoid;
-    // public Solenoid rightSolenoid;
     
     public ClimberSubsystem() {
         leftFixed = new WPI_TalonFX(Constants.LEFT_FIXED_MOTOR);
@@ -48,15 +45,12 @@ public class ClimberSubsystem extends SubsystemBase {
     
         leftPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
         rightPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
+        
         leftPiston.set(DoubleSolenoid.Value.kOff);
         rightPiston.set(DoubleSolenoid.Value.kOff);
+
         fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
         articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
-        // rightFrontMotor = new TalonFX(Constants.FRONT_RIGHT_CLIMBER_PORT);
-        // rightBackMotor = new TalonFX(Constants.BACK_RIGHT_CLIMBER_PORT);
-
-        // leftSolenoid = new Solenoid(Constants.PCM1, 0);
-        // rightSolenoid = new Solenoid(Constants.PCM2, 0);
 
 
     }
@@ -86,6 +80,22 @@ public class ClimberSubsystem extends SubsystemBase {
     
     }
 
+    /* public void stretchFixedArms() {
+        while (leftFixed.getSelectedSensorPosition() <= Constants.FIXED_ARM_UPPER_LIMIT) {
+            fixedGroup.set(1.0);
+        }
+
+        fixedGroup.set(0.0);
+    }
+
+    public void withdrawFixedArms() {
+        while(leftFixed.getSelectedSensorPosition() >= Constants.FIXED_ARM_LOWER_LIMIT) {
+            fixedGroup.set(-1.0);
+        }
+
+        fixedGroup.set(0.0);
+    } */
+
     public void extendArticulatingArms(){
         if (leftArticulating.getSelectedSensorPosition() <= Constants.ARTICULATING_ARM_UPPER_LIMIT) {
             articulatingGroup.set(0.1);
@@ -95,13 +105,29 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void retractArticulatingArms(){
-        if (leftArticulating.getSelectedSensorPosition() >= Constants.ARTICULATING_ARM_UPPER_LIMIT) {
+        if (leftArticulating.getSelectedSensorPosition() >= Constants.ARTICULATING_ARM_LOWER_LIMIT) {
             articulatingGroup.set(-0.1);
         } else {
             articulatingGroup.set(0);
         }
     }
 
+    /* public void stretchArticulatingArms() {
+        while (leftArticulating.getSelectedSensorPosition() <= Constants.ARTICULATING_ARM_UPPER_LIMIT) {
+            articulatingGroup.set(1.0);
+        }
+
+        articulatingGroup.set(0.0);
+    }
+    
+    public void withdrawArticulatingArms() {
+        while (leftArticulating.getSelectedSensorPosition()>= Constants.ARTICULATING_ARM_LOWER_LIMIT){
+            articulatingGroup.set(-1.0);
+        }
+        articulatingGroup.set(0.0);
+    } */
+    
+    
     // moves articulating arms forward
     public void angleArticulatingArms() {
         leftPiston.set(DoubleSolenoid.Value.kForward);
