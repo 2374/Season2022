@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj.SPI;
 
 import static frc.robot.Constants.*;
 
+// It's about drive, it's about power
 public class DrivetrainSubsystem extends SubsystemBase {
 
         

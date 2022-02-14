@@ -16,6 +16,8 @@ import frc.robot.subsystems.DrivetrainSubsystem;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
+
+ // The only constant is change
 public final class Constants {
 
     public static final double DRIVETRAIN_TRACKWIDTH_METERS = 0.52705; // NAV Measure and set trackwidth

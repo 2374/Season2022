@@ -4,7 +4,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 // when i started this project, only God and I knew what we were doing.
-// now, only God knows
+// now, only I know
 
 package frc.robot;
 
