@@ -28,6 +28,8 @@ public final class Constants {
      */
     public static final double DRIVETRAIN_WHEELBASE_METERS = 0.46355; // NAV Measure and set wheelbase
 
+
+
     public static final double DRIVESPEED_MODIFIER = 0.5;
     public static final double PXCONTROLLER = 1.0;
     public static final double PYCONTROLLER = 1.0;
@@ -58,9 +60,9 @@ public final class Constants {
     public static final int BACK_RIGHT_MODULE_STEER_ENCODER = 24; // NAV Set back right steer encoder ID
     public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(-25.751901); // NAV Measure and set back right steer offset
 
-    public static final int LEFT_SHOOTER = 11;
+    public static final int LEFT_SHOOTER = 5;
     public static final int RIGHT_SHOOTER = 6;                                                                                                                                                    
-    public static final int INTAKE_MOTOR = -1;
+    public static final int INTAKE_MOTOR = 7;
     public static final int XBOX_CONTROLLER_PORT = 0;
     public static final int XBOX_2_CONTROLLER_PORT = 1;
 
@@ -83,7 +85,7 @@ public final class Constants {
 
 	public static final double LIMELIGHT_TOLERANCE = 0.03;
     public static final PneumaticsModuleType PCM_INTAKE = null;
-    public static final int SPINNY_MOTOR = 200;
+    public static final int SPINNY_MOTOR = 8;
 
     public static int FORWARD_CHANNEL = 2000;
     public static int REVERSE_CHANNEL = 2000;
