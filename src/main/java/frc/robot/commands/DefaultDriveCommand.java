@@ -1,8 +1,5 @@
 package frc.robot.commands;
 
-// This statement is false! 
-// Umm... True!
-
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -10,8 +7,6 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 import java.util.function.DoubleSupplier;
-
-// Henry Cavill = Superman, Henry Gorman = Henry, Henry = Henry, so Henry Gorman = Superman
 
 public class DefaultDriveCommand extends CommandBase {
     private final DrivetrainSubsystem m_drivetrainSubsystem;

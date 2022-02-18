@@ -6,14 +6,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.ShooterSubsystem;
 
-// Welp, I'm going to grillby's. Papyrus, do you want anything?
-
 public class InteractiveDriveCommand extends CommandBase {
     private ShooterSubsystem m_shooter;
     // private ClimberSubsystem m_climber;
     private XboxController xbox = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-    
-    // Hey, you, you're finally awake
 
     public InteractiveDriveCommand(ShooterSubsystem shooter /*, ClimberSubsystem climber*/) {
         m_shooter = shooter;

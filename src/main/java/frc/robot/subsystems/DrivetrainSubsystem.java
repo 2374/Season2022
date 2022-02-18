@@ -1,3 +1,4 @@
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -30,7 +31,6 @@ import edu.wpi.first.wpilibj.SPI;
 
 import static frc.robot.Constants.*;
 
-// It's about drive, it's about power
 public class DrivetrainSubsystem extends SubsystemBase {
 
         
@@ -163,7 +163,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
                                 FRONT_LEFT_MODULE_STEER_ENCODER,
                                 // This is how much the steer encoder is offset from true zero (In our case,
                                 // zero is facing straight forward)
-                                FRONT_LEFT_MODULE_STEER_OFFSET);
+                                FRONT_LEFT_MODULE_STEER_OFFSET,
+                                // This is the CAN BUS name to use
+                                DRIVETRAIN_CAN_BUS_NAME);
 
                 // We will do the same for the other modules
                 m_frontRightModule = Mk3SwerveModuleHelper.createFalcon500(
@@ -174,7 +176,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
                                 FRONT_RIGHT_MODULE_DRIVE_MOTOR,
                                 FRONT_RIGHT_MODULE_STEER_MOTOR,
                                 FRONT_RIGHT_MODULE_STEER_ENCODER,
-                                FRONT_RIGHT_MODULE_STEER_OFFSET);
+                                FRONT_RIGHT_MODULE_STEER_OFFSET,
+                                DRIVETRAIN_CAN_BUS_NAME);
 
                 m_backLeftModule = Mk3SwerveModuleHelper.createFalcon500(
                                 tab.getLayout("Back Left Module", BuiltInLayouts.kList)
@@ -184,7 +187,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
                                 BACK_LEFT_MODULE_DRIVE_MOTOR,
                                 BACK_LEFT_MODULE_STEER_MOTOR,
                                 BACK_LEFT_MODULE_STEER_ENCODER,
-                                BACK_LEFT_MODULE_STEER_OFFSET);
+                                BACK_LEFT_MODULE_STEER_OFFSET,
+                                DRIVETRAIN_CAN_BUS_NAME);
 
                 m_backRightModule = Mk3SwerveModuleHelper.createFalcon500(
                                 tab.getLayout("Back Right Module", BuiltInLayouts.kList)
@@ -194,7 +198,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
                                 BACK_RIGHT_MODULE_DRIVE_MOTOR,
                                 BACK_RIGHT_MODULE_STEER_MOTOR,
                                 BACK_RIGHT_MODULE_STEER_ENCODER,
-                                BACK_RIGHT_MODULE_STEER_OFFSET);
+                                BACK_RIGHT_MODULE_STEER_OFFSET,
+                                DRIVETRAIN_CAN_BUS_NAME);
+
+                                
         }
 
         public void changeTurboModeTrue() {

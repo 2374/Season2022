@@ -2,61 +2,51 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
-// when i started this project, only God and I knew what we were doing.
-// now, only I know
-
 package frc.robot;
 
 import java.io.IOException;
 
-//it's a me, a Mario 
-// I am vengeance
 import edu.wpi.first.wpilibj.GenericHID;
-// I'm not coming back for 30%, I'm coming back for everything!
-// For Gotham!
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-//DOWNLOAD THE MUSTACHE SYMBOL
 import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-//beautiful
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
-//put a marker through it
-import frc.robot.subsystems.SpinnySubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.util.AutonomousChooser;
 import frc.robot.util.AutonomousTrajectories;
+import frc.robot.commands.GyroResetCommand;
+
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  private final SpinnySubsystem m_spinnySubsystem = new SpinnySubsystem();
+  private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
 
-  // When Leonardo DiCaprio can't fit through a door:(
-
-  private static XboxController xbox = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-  private static XboxController beanspeed = new XboxController(Constants.XBOX_2_CONTROLLER_PORT); //at the speed of gene
+  private static XboxController m_controller = new XboxController(Constants.XBOX_CONTROLLER_PORT);
+  final JoystickButton con_backButton = new JoystickButton(m_controller, 7 );
+  private static XboxController m_ord = new XboxController(Constants.XBOX_2_CONTROLLER_PORT); //at the speed of gene
 
   private AutonomousTrajectories autonomousTrajectories;
   private final AutonomousChooser autonomousChooser;
 
-  //so... I was bored
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
-  //greatest statement of all time
   public RobotContainer() {
     try {
       autonomousTrajectories = new AutonomousTrajectories(DrivetrainSubsystem.TRAJECTORY_CONSTRAINTS);
@@ -70,28 +60,24 @@ public class RobotContainer {
     // Left stick Y axis -> forward and backwards movement
     // Left stick X axis -> left and right movement
     // Right stick X axis -> rotation
-    //hello Mithra Karamaehcduo
     m_drivetrainSubsystem.setDefaultCommand(new DefaultDriveCommand(
             m_drivetrainSubsystem,
-            () -> -modifyAxis(xbox.getLeftY()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-            () -> -modifyAxis(xbox.getLeftX()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-            () -> -modifyAxis(xbox.getRightX()) * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND
+            () -> -modifyAxis(m_controller.getLeftY()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+            () -> -modifyAxis(m_controller.getLeftX()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+            () -> -modifyAxis(m_ord.getRightX()) * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND
     ));
-//headsmash *gftrgftrg*
-
 
     // Configure the button bindings
     configureButtonBindings();
   }
 
   
-private boolean getBeanspeedLeftTrigger() {
-  return beanspeed.getLeftTriggerAxis() > 0.05;
-}
-private boolean getBeanspeedRightTrigger() {
-  return beanspeed.getRightTriggerAxis() > 0.05;
-}
-//do you organize your apps by color?
+// private boolean getOrdLeftTrigger() {
+//   return m_ord.getLeftTriggerAxis() > 0.05;
+// }
+// private boolean getOrdRightTrigger() {
+//   return m_ord.getRightTriggerAxis() > 0.05;
+// }
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -99,30 +85,33 @@ private boolean getBeanspeedRightTrigger() {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
 
-  // don't believe me, I will
-  // On your right
-
   private void configureButtonBindings() {
 
     // Back Button zeroes the gyroscope
-    new Button(xbox::getBackButton).whenPressed(m_drivetrainSubsystem::zeroGyroscope);
+     //new Button(m_controller::getBackButton).whenPressed(new GyroResetCommand(m_drivetrainSubsystem));
+    //  m_controller.getBackButton().whenPressed(()->m_drivetrainSubsystem.zeroGyroscope());
+    con_backButton.whileHeld(new GyroResetCommand(m_drivetrainSubsystem));
+    // new Button(m_controller::getAButtonPressed).whenPressed(m_drivetrainSubsystem::changeTurboModeTrue);
+    // new Button(m_controller::getAButtonReleased).whenReleased(m_drivetrainSubsystem::changeTurboModeFalse);
+    // new Button(m_ord::getXButtonPressed).whenPressed(m_turretSubsystem::rotateLeft);
+    // new Button(m_ord::getXButtonReleased).whenReleased(m_turretSubsystem::rotateStop);
+    // new Button(m_ord::getBButtonPressed).whenPressed(m_turretSubsystem::rotateRight);
+    // new Button(m_ord::getBButtonReleased).whenReleased(m_turretSubsystem::rotateStop);
     
     
-    /* 
-    new Button(beanspeed::getYButton).whenPressed(m_climberSubsystem::extendFixedArms);
-    new Button(beanspeed::getBButton).whenPressed(m_climberSubsystem::extendArticulatingArms);
-    new Button(beanspeed::getAButton).whenPressed(m_climberSubsystem::retractArticulatingArms);
-    new Button(beanspeed::getXButton).whenPressed(m_climberSubsystem::retractFixedArms);
-    new Button(beanspeed::getLeftBumper).whenPressed(m_spinnySubsystem::spinToTarget);
-    new Button(beanspeed::getRightBumper).whenPressed(m_shooterSubsystem::shoot);
-    new Button(this::getBeanspeedLeftTrigger).whenPressed(m_spinnySubsystem::rotateLeft);
-    new Button(this::getBeanspeedRightTrigger).whenPressed(m_spinnySubsystem::rotateRight);
-    new Button(xbox::getBButton).whenPressed(m_intakeSubsystem::start);
-    new Button(xbox::getAButton).whenPressed(m_intakeSubsystem::retractPistons);
-    new Button(xbox::getYButton).whenPressed(m_intakeSubsystem::extendPistons); 
+    // new Button(m_ord::getAButtonPressed).whenPressed(m_turretSubsystem::spinToTarget);
+    // new Button(m_ord::getRightBumperPressed).whenPressed(m_shooterSubsystem::shoot);
+    // new Button(m_ord::getRightBumperReleased).whenReleased(m_shooterSubsystem::stop);
+    /*
+    new Button(m_ord::getYButton).whenPressed(m_climberSubsystem::extendFixedArms);
+    new Button(m_ord::getBButton).whenPressed(m_climberSubsystem::extendArticulatingArms);
+    new Button(m_ord::getAButton).whenPressed(m_climberSubsystem::retractArticulatingArms);
+    new Button(m_ord::getXButton).whenPressed(m_climberSubsystem::retractFixedArms);
+    new Button(m_controller::getBButton).whenPressed(m_intakeSubsystem::start);
+    new Button(m_controller::getAButton).whenPressed(m_intakeSubsystem::retractPistons);
+    new Button(m_controller::getYButton).whenPressed(m_intakeSubsystem::extendPistons); 
     */
   }
-//it's to improve your social skills
 
 public void executeAutoCommands(){
 
@@ -158,7 +147,7 @@ public void executeAutoCommands(){
     value = Math.copySign(value * value, value);
     
     // TURBO MODE!
-    if (xbox.getRightBumper()) {
+    if (m_controller.getRightBumper()) {
       return value;
     } else {
       return 0.5*value;

@@ -19,11 +19,9 @@ public class ClimberSubsystem extends SubsystemBase {
     public WPI_TalonFX leftArticulating;
     public WPI_TalonFX rightArticulating;
 
-    public Compressor compressor;
-    public DoubleSolenoid leftPiston;
-    public DoubleSolenoid rightPiston;
-
-    // You feel your sins climbing on your back
+    // public Compressor compressor;
+    // public DoubleSolenoid leftPiston;
+    // public DoubleSolenoid rightPiston;
 
     public MotorControllerGroup fixedGroup;
     public MotorControllerGroup articulatingGroup;
@@ -41,13 +39,13 @@ public class ClimberSubsystem extends SubsystemBase {
         leftArticulating.setNeutralMode(NeutralMode.Brake);
         rightArticulating.setNeutralMode(NeutralMode.Brake);
 
-        compressor = new Compressor(Constants.PCM);
+        // compressor = new Compressor(Constants.PCM);
     
-        leftPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
-        rightPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
+        // leftPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
+        // rightPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
         
-        leftPiston.set(DoubleSolenoid.Value.kOff);
-        rightPiston.set(DoubleSolenoid.Value.kOff);
+        // leftPiston.set(DoubleSolenoid.Value.kOff);
+        // rightPiston.set(DoubleSolenoid.Value.kOff);
 
         fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
         articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
@@ -129,21 +127,21 @@ public class ClimberSubsystem extends SubsystemBase {
     
     
     // moves articulating arms forward
-    public void angleArticulatingArms() {
-        leftPiston.set(DoubleSolenoid.Value.kForward);
-        rightPiston.set(DoubleSolenoid.Value.kForward);
-    }
+    // public void angleArticulatingArms() {
+    //     leftPiston.set(DoubleSolenoid.Value.kForward);
+    //     rightPiston.set(DoubleSolenoid.Value.kForward);
+    // }
 
-    // moves articulating arms in reverse
-    public void reverseArticulatingArms() {
-        leftPiston.set(DoubleSolenoid.Value.kReverse);
-        rightPiston.set(DoubleSolenoid.Value.kReverse);
-    }
+    // // moves articulating arms in reverse
+    // public void reverseArticulatingArms() {
+    //     leftPiston.set(DoubleSolenoid.Value.kReverse);
+    //     rightPiston.set(DoubleSolenoid.Value.kReverse);
+    // }
 
-    public void stopPistons() {
-        leftPiston.set(DoubleSolenoid.Value.kOff);
-        rightPiston.set(DoubleSolenoid.Value.kOff);
-    } 
+    // public void stopPistons() {
+    //     leftPiston.set(DoubleSolenoid.Value.kOff);
+    //     rightPiston.set(DoubleSolenoid.Value.kOff);
+    // } 
     
     public void stopFixedArms(){
         fixedGroup.set(0);
