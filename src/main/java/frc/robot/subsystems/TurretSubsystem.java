@@ -2,16 +2,26 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.vision.Limelight;
 import frc.robot.vision.Limelight.LightMode;
 
-public class TurretSubsystem {
+public class TurretSubsystem extends SubsystemBase {
     private WPI_TalonFX spinner;
     private Limelight limelight = new Limelight();
+    private TurretSubsystem instance;
 
     public TurretSubsystem() {
         spinner = new WPI_TalonFX(Constants.TURRET_MOTOR); // must be on the RIO
+    }
+
+    public TurretSubsystem getTurretInstance() {
+        if (instance == null) {
+            instance = new TurretSubsystem();
+        }
+        
+        return instance;
     }
 
     public void rotateLeft() {

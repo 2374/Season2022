@@ -27,7 +27,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.util.AutonomousChooser;
 import frc.robot.util.AutonomousTrajectories;
-import frc.robot.commands.GyroResetCommand;
+import frc.robot.commands.buttonCommands.*;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -38,7 +38,6 @@ public class RobotContainer {
   private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
 
   private static XboxController m_controller = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-  final JoystickButton con_backButton = new JoystickButton(m_controller, 7 );
   private static XboxController m_ord = new XboxController(Constants.XBOX_2_CONTROLLER_PORT); //at the speed of gene
 
   private AutonomousTrajectories autonomousTrajectories;
@@ -88,17 +87,24 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // Back Button zeroes the gyroscope
-     //new Button(m_controller::getBackButton).whenPressed(new GyroResetCommand(m_drivetrainSubsystem));
     //  m_controller.getBackButton().whenPressed(()->m_drivetrainSubsystem.zeroGyroscope());
-    con_backButton.whileHeld(new GyroResetCommand(m_drivetrainSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_BACK_BUTTON_ID).whenPressed(new GyroResetCommand(m_drivetrainSubsystem));
     // new Button(m_controller::getAButtonPressed).whenPressed(m_drivetrainSubsystem::changeTurboModeTrue);
+    new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new TurboModeOnCommand(m_drivetrainSubsystem));
     // new Button(m_controller::getAButtonReleased).whenReleased(m_drivetrainSubsystem::changeTurboModeFalse);
+//    new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenReleased(new TurboModeOffCommand(m_drivetrainSubsystem));
     // new Button(m_ord::getXButtonPressed).whenPressed(m_turretSubsystem::rotateLeft);
+    new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenPressed(new RotateLeftCommand(m_turretSubsystem));
     // new Button(m_ord::getXButtonReleased).whenReleased(m_turretSubsystem::rotateStop);
+    new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenReleased(new RotateStopCommand(m_turretSubsystem));
     // new Button(m_ord::getBButtonPressed).whenPressed(m_turretSubsystem::rotateRight);
+    new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenPressed(new RotateRightCommand(m_turretSubsystem));
     // new Button(m_ord::getBButtonReleased).whenReleased(m_turretSubsystem::rotateStop);
+    new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenReleased(new RotateStopCommand(m_turretSubsystem));
     
-    
+    // 
+
+
     // new Button(m_ord::getAButtonPressed).whenPressed(m_turretSubsystem::spinToTarget);
     // new Button(m_ord::getRightBumperPressed).whenPressed(m_shooterSubsystem::shoot);
     // new Button(m_ord::getRightBumperReleased).whenReleased(m_shooterSubsystem::stop);

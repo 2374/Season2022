@@ -81,10 +81,10 @@ public final class Constants {
     public static final PneumaticsModuleType PCM2 = null;
     public static final PneumaticsModuleType PCM = null;
 
-    public static int FIXED_ARM_UPPER_LIMIT = 24576;
-    public static int FIXED_ARM_LOWER_LIMIT = 0;
-    public static int ARTICULATING_ARM_UPPER_LIMIT = 24576;
-    public static int ARTICULATING_ARM_LOWER_LIMIT = 0;
+    public static final int FIXED_ARM_UPPER_LIMIT = 24576;
+    public static final int FIXED_ARM_LOWER_LIMIT = 0;
+    public static final int ARTICULATING_ARM_UPPER_LIMIT = 24576;
+    public static final int ARTICULATING_ARM_LOWER_LIMIT = 0;
 
 	public static final double LIMELIGHT_TOLERANCE = 0.03;
     public static final PneumaticsModuleType PCM_INTAKE = null;
@@ -92,6 +92,18 @@ public final class Constants {
     public static final double TURRET_POWER = 0.2; // 50% power
 
 
-    public static int FORWARD_CHANNEL = 2000;
-    public static int REVERSE_CHANNEL = 2000;
+    public static final int FORWARD_CHANNEL = 2000;
+    public static final int REVERSE_CHANNEL = 2000;
+
+    public static final int CONTROLLER_A_BUTTON_ID = 1;
+    public static final int CONTROLLER_B_BUTTON_ID = 2;
+    public static final int CONTROLLER_X_BUTTON_ID = 3;
+    public static final int CONTROLLER_Y_BUTTON_ID = 4;
+    public static final int CONTROLLER_LEFT_BUMPER_ID = 5;
+    public static final int CONTROLLER_RIGHT_BUMPER_ID = 6;
+    public static final int CONTROLLER_BACK_BUTTON_ID = 7;
+    public static final int CONTROLLER_START_BUTTON_ID = 8;
+    public static final int CONTROLLER_LEFT_JOYSTICK_BUTTON_ID = 9;
+    public static final int CONTROLLER_RIGHT_JOYSTICK_BUTTON_ID = 10;
+
 }
