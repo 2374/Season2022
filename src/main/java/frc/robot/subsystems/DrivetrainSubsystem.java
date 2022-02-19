@@ -205,10 +205,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
         }
 
         public void changeTurboModeTrue() {
+                System.out.println("TURBO");
                 TurboMode = true;
         }
 
         public void changeTurboModeFalse() {
+                System.out.println("no turbo");
                 TurboMode = false;
         }
 
@@ -230,6 +232,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
                 synchronized (sensorLock) {
                         m_navx.zeroYaw();
                 }
+        }
+
+        public void run(){
+                
         }
 
         public Rotation2d getGyroscopeRotation() {
