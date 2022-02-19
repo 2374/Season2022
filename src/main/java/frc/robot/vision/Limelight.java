@@ -38,7 +38,7 @@ public class Limelight {
        
         
         // for horizontal alignment limelight pipeline 1 is the ball, pipeline two is the hatch 
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1); // change the setNumber to the appropriate target
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(2); // change the setNumber to the appropriate target
         final double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         final double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
         final double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
