@@ -18,5 +18,6 @@ public class RotateLeftCommand extends CommandBase{
 
     @Override
     public void end(boolean interrupted) {
+        m_turretSubsystem.stop();
     }
 }

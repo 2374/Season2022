@@ -26,14 +26,17 @@ public class TurretSubsystem extends SubsystemBase {
 
     public void rotateLeft() {
         spinner.set(-Constants.TURRET_POWER);
+        System.out.println("Rotating Left");
     }
 
     public void rotateRight() {
         spinner.set(Constants.TURRET_POWER);
+        System.out.println("Rotating Right");
     }
 
     public void rotateStop() {
         stop();
+        System.out.println("Stopping");
     }
     /*
     find rotation amount to center

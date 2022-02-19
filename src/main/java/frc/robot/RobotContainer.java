@@ -92,15 +92,12 @@ public class RobotContainer {
     // new Button(m_controller::getAButtonPressed).whenPressed(m_drivetrainSubsystem::changeTurboModeTrue);
     new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new TurboModeOnCommand(m_drivetrainSubsystem));
     // new Button(m_controller::getAButtonReleased).whenReleased(m_drivetrainSubsystem::changeTurboModeFalse);
-//    new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenReleased(new TurboModeOffCommand(m_drivetrainSubsystem));
     // new Button(m_ord::getXButtonPressed).whenPressed(m_turretSubsystem::rotateLeft);
-    new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenPressed(new RotateLeftCommand(m_turretSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenHeld(new RotateLeftCommand(m_turretSubsystem));
     // new Button(m_ord::getXButtonReleased).whenReleased(m_turretSubsystem::rotateStop);
-    new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenReleased(new RotateStopCommand(m_turretSubsystem));
     // new Button(m_ord::getBButtonPressed).whenPressed(m_turretSubsystem::rotateRight);
-    new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenPressed(new RotateRightCommand(m_turretSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenHeld(new RotateRightCommand(m_turretSubsystem));
     // new Button(m_ord::getBButtonReleased).whenReleased(m_turretSubsystem::rotateStop);
-    new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenReleased(new RotateStopCommand(m_turretSubsystem));
     
     // 
 
