@@ -1,4 +1,6 @@
 package frc.robot.subsystems;
+import java.util.concurrent.TimeUnit;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.Constants;
@@ -46,8 +48,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void shoot() {
         mainGroup.set(-0.85);
-        power = -.3;
-        indexGroup.set(0.2);
+        power = -.2;
         // if (limelight.isLockedOn()) {
             double d = limelight.calculateDistance();
             System.out.println("TARGET DIST=" + d);
@@ -67,10 +68,12 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void on(){
+        System.out.println("index on");
         indexGroup.set(0.2);
     }
 
     public void off(){
+        System.out.println("index off");
         indexGroup.set(0);
     }
 }

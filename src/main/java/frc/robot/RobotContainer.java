@@ -98,9 +98,10 @@ public class RobotContainer {
     // new Button(m_ord::getBButtonPressed).whenPressed(m_turretSubsystem::rotateRight);
     new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenHeld(new RotateRightCommand(m_turretSubsystem));
     // new Button(m_ord::getBButtonReleased).whenReleased(m_turretSubsystem::rotateStop);
-    
-    // 
-
+    new JoystickButton(m_ord, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new IntakeOnCommand(m_intakeSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new IndexOnCommand(m_shooterSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenHeld(new ShootCommand(m_shooterSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_BUMPER_ID).whenHeld(new FullShootCommand(m_shooterSubsystem, m_intakeSubsystem));
 
     // new Button(m_ord::getAButtonPressed).whenPressed(m_turretSubsystem::spinToTarget);
     // new Button(m_ord::getRightBumperPressed).whenPressed(m_shooterSubsystem::shoot);

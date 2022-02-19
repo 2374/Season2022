@@ -10,15 +10,15 @@ import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
     private WPI_TalonFX motor;
-    // private Compressor compressor;
-    // private DoubleSolenoid leftPiston;
-    // private DoubleSolenoid rightPiston;
+    //private Compressor compressor;
+    //private DoubleSolenoid leftPiston;
+    //private DoubleSolenoid rightPiston;
 
     private IntakeSubsystem instance;
 
     public IntakeSubsystem(){
-        motor = new WPI_TalonFX(Constants.INTAKE_MOTOR);
-        // compressor = new Compressor(Constants.PCM_INTAKE);
+        motor = new WPI_TalonFX(Constants.INTAKE_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
+        //compressor = new Compressor(Constants.PCM_INTAKE);
         //leftPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
         //rightPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
     }
@@ -32,7 +32,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void start() {
-        motor.set(0.5);
+        motor.set(0.4);
     }
 
     public void stop() {
