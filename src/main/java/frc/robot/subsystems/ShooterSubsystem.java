@@ -67,12 +67,12 @@ public class ShooterSubsystem extends SubsystemBase {
         return power;
     }
 
-    public void on(){
+    public void indexerOn(){
         System.out.println("index on");
         indexGroup.set(0.2);
     }
 
-    public void off(){
+    public void indexerOff(){
         System.out.println("index off");
         indexGroup.set(0);
     }
