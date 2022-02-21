@@ -8,14 +8,19 @@ import frc.robot.vision.Limelight;
 import frc.robot.vision.Limelight.LightMode;
 
 public class TurretSubsystem extends SubsystemBase {
-    private WPI_TalonFX spinner;
+    private WPI_TalonFX spinnerMotor;
     private Limelight limelight = new Limelight();
     private TurretSubsystem instance;
 
     public TurretSubsystem() {
-        spinner = new WPI_TalonFX(Constants.TURRET_MOTOR); // must be on the RIO
+        spinnerMotor = new WPI_TalonFX(Constants.TURRET_MOTOR); // must be on the RIO
     }
 
+    
+    /** 
+     * Provide the current instance of the turret subsystem.
+     * @return TurretSubsystem
+     */
     public TurretSubsystem getTurretInstance() {
         if (instance == null) {
             instance = new TurretSubsystem();
@@ -24,27 +29,36 @@ public class TurretSubsystem extends SubsystemBase {
         return instance;
     }
 
+    /**
+     * Rotate the turret Left
+     */
     public void rotateLeft() {
-        spinner.set(-Constants.TURRET_POWER);
+        spinnerMotor.set(-Constants.TURRET_POWER);
         System.out.println("Rotating Left");
     }
 
+    /**
+     * Rotate the turret Right
+     */
     public void rotateRight() {
-        spinner.set(Constants.TURRET_POWER);
+        spinnerMotor.set(Constants.TURRET_POWER);
         System.out.println("Rotating Right");
     }
 
+    /**
+     * Stop the current rotation of the turret
+     */
     public void rotateStop() {
         stop();
         System.out.println("Stopping");
     }
-    /*
-    find rotation amount to center
-    rotate
-    check if within tolerance
-    if within -> shoot
-    else go to top
-    */
+    /**
+     * Find the rotation amount to center the turret
+     * rotate towards target until method determines
+     * that the current alignment is with in tolerance
+     * then return to caller allowing them to know
+     * that we are aligned to the target
+     */
     public void spinToTarget() {
         limelight.updateTracking();
         Limelight.setLedMode(LightMode.eOn);
@@ -64,7 +78,10 @@ public class TurretSubsystem extends SubsystemBase {
         // Limelight.setLedMode(LightMode.eOff);
     }
 
+    /**
+     * stop the turrent from moving
+     */
     public void stop() {
-        spinner.set(0.0);
+        spinnerMotor.set(0.0);
     }
 }

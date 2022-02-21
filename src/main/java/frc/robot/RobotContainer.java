@@ -71,33 +71,19 @@ public class RobotContainer {
   }
 
   
-// private boolean getOrdLeftTrigger() {
-//   return m_ord.getLeftTriggerAxis() > 0.05;
-// }
-// private boolean getOrdRightTrigger() {
-//   return m_ord.getRightTriggerAxis() > 0.05;
-// }
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-
   private void configureButtonBindings() {
 
     // Back Button zeroes the gyroscope
-    //  m_controller.getBackButton().whenPressed(()->m_drivetrainSubsystem.zeroGyroscope());
     new JoystickButton(m_controller, Constants.CONTROLLER_BACK_BUTTON_ID).whenPressed(new GyroResetCommand(m_drivetrainSubsystem));
-    // new Button(m_controller::getAButtonPressed).whenPressed(m_drivetrainSubsystem::changeTurboModeTrue);
     new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new TurboModeOnCommand(m_drivetrainSubsystem));
-    // new Button(m_controller::getAButtonReleased).whenReleased(m_drivetrainSubsystem::changeTurboModeFalse);
-    // new Button(m_ord::getXButtonPressed).whenPressed(m_turretSubsystem::rotateLeft);
     new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenHeld(new RotateLeftCommand(m_turretSubsystem));
-    // new Button(m_ord::getXButtonReleased).whenReleased(m_turretSubsystem::rotateStop);
-    // new Button(m_ord::getBButtonPressed).whenPressed(m_turretSubsystem::rotateRight);
     new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenHeld(new RotateRightCommand(m_turretSubsystem));
-    // new Button(m_ord::getBButtonReleased).whenReleased(m_turretSubsystem::rotateStop);
     new JoystickButton(m_ord, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new IntakeOnCommand(m_intakeSubsystem));
     new JoystickButton(m_ord, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new IndexOnCommand(m_shooterSubsystem));
     new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenHeld(new ShootCommand(m_shooterSubsystem));

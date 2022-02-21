@@ -31,7 +31,7 @@ public class IntakeSubsystem extends SubsystemBase {
         return instance;
     }
 
-    public void start() {
+    public void enableIntake() {
         motor.set(0.4);
     }
 

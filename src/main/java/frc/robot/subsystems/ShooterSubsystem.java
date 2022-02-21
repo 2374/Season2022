@@ -46,7 +46,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     //control classes
 
-    public void shoot() {
+    public void shootBallAtCurrentAcquiredTarget() {
         mainGroup.set(-0.85);
         power = -.2;
         // if (limelight.isLockedOn()) {

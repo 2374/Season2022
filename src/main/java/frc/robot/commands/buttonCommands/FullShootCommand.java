@@ -31,8 +31,8 @@ public class FullShootCommand extends CommandBase{
      */
     @Override
     public void execute() {
-        m_intakeSubsystem.start();
-        m_shooterSubsystem.shoot();
+        m_intakeSubsystem.enableIntake();
+        m_shooterSubsystem.shootBallAtCurrentAcquiredTarget();
         m_shooterSubsystem.indexerOn();
     }
 

@@ -10,8 +10,9 @@ public class IndexOnCommand extends CommandBase{
     private final ShooterSubsystem m_shooterSubsystem;
 
     /** 
-     * Which shooter subsystem should the indexer be ingaged for?
-     * @param shooterSubsystem
+     * Turn on the indexer for a given shooter subsystem for the length of
+     * the command.
+     * @param shooterSubsystem Which shooter subsystem should the indexer be engaged for?
      */
     public IndexOnCommand(ShooterSubsystem shooterSubsystem) {
         this.m_shooterSubsystem = shooterSubsystem;

@@ -25,7 +25,7 @@ public class InteractiveDriveCommand extends CommandBase {
         SmartDashboard.putNumber("Shooter Power", m_shooter.getPower());
 
         if (xbox.getAButton()) {
-            m_shooter.shoot();
+            m_shooter.shootBallAtCurrentAcquiredTarget();
         } else {    
             m_shooter.stop();
         }
