@@ -25,7 +25,7 @@ public class FullShootCommand extends CommandBase{
     }
 
     /**
-     * Wehn the command is running it needs to start the intake to feed balls through
+     * When the command is running it needs to start the intake to feed balls through
      * initialize the shooter and finally turn on the shooter to fire the ball at the 
      * target
      */

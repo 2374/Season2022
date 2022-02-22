@@ -87,13 +87,15 @@ public final class Constants {
     public static final int ARTICULATING_ARM_LOWER_LIMIT = 0;
 
 	public static final double LIMELIGHT_TOLERANCE = 0.03;
-    public static final PneumaticsModuleType PCM_INTAKE = null;
+    public static final int PCM_INTAKE = 30;
     public static final int TURRET_MOTOR = 8;
     public static final double TURRET_POWER = 0.2; // 50% power
 
 
-    public static final int FORWARD_CHANNEL = 2000;
-    public static final int REVERSE_CHANNEL = 2000;
+    public static final int FORWARD_CHANNEL_LEFT = 4;
+    public static final int REVERSE_CHANNEL_LEFT = 5;
+    public static final int FORWARD_CHANNEL_RIGHT = 6;
+    public static final int REVERSE_CHANNEL_RIGHT = 7;
 
     public static final int CONTROLLER_A_BUTTON_ID = 1;
     public static final int CONTROLLER_B_BUTTON_ID = 2;

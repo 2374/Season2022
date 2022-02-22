@@ -53,7 +53,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     }
 
-    public ClimberSubsystem getShooterInstance() {
+    public ClimberSubsystem getClimberInstance() {
         if (instance == null) {
             instance = new ClimberSubsystem();
         }
@@ -75,7 +75,6 @@ public class ClimberSubsystem extends SubsystemBase {
         } else {
             fixedGroup.set(0);
         }
-    
     }
 
     /* public void stretchFixedArms() {
