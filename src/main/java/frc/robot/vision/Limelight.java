@@ -41,7 +41,7 @@ public class Limelight {
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(2); // change the setNumber to the appropriate target
         final double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         final double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-        final double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+        // final double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
         final double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
 
         if (tv < 1.0) {

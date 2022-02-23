@@ -1,5 +1,5 @@
 package frc.robot.util;
-// I support child labor - Charlene de la paz
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
