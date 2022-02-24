@@ -20,12 +20,15 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 public final class Constants {
 
     public static final double DRIVETRAIN_TRACKWIDTH_METERS = 0.491; // NAV Measure and set trackwidth
+    // public static final double DRIVETRAIN_TRACKWIDTH_METERS = 0.55; //SWERVEE; // NAV Measure and set trackwidth
+
     /**
      * The front-to-back distance between the drivetrain wheels.
      *
      * Should be measured from center to center.
      */
     public static final double DRIVETRAIN_WHEELBASE_METERS = 0.491; // NAV Measure and set wheelbase
+    // public static final double DRIVETRAIN_WHEELBASE_METERS = 0.47; //SWERVEE; // NAV Measure and set wheelbase
 
 
 
@@ -47,21 +50,29 @@ public final class Constants {
     public static final int FRONT_LEFT_MODULE_STEER_MOTOR = 11; // NAV Set front left module steer motor ID
     public static final int FRONT_LEFT_MODULE_STEER_ENCODER = 21; // NAV Set front left steer encoder ID
     public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(2.279663); // NAV Measure and set front left steer offset
+    // public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(-170.155906); // SWERVEE; // NAV Measure and set front left steer offset
+
 
     public static final int FRONT_RIGHT_MODULE_DRIVE_MOTOR = 2; // NAV Set front right drive motor ID
     public static final int FRONT_RIGHT_MODULE_STEER_MOTOR = 12; // NAV Set front right steer motor ID
     public static final int FRONT_RIGHT_MODULE_STEER_ENCODER = 22; // NAV Set front right steer encoder ID
     public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(261.914062); // NAV Measure and set front right steer offset
+    // public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(35.156179); // SWERVEE // NAV Measure and set front right steer offset
+
 
     public static final int BACK_LEFT_MODULE_DRIVE_MOTOR = 3; // NAV Set back left drive motor ID
     public static final int BACK_LEFT_MODULE_STEER_MOTOR = 13; // NAV Set back left steer motor ID
     public static final int BACK_LEFT_MODULE_STEER_ENCODER = 23; // NAV Set back left steer encoder ID
     public static final double BACK_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(59.501940); // NAV Measure and set back left steer offset
+    // public static final double BACK_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(125.859121); // SWERVEE; // NAV Measure and set back left steer offset
+
 
     public static final int BACK_RIGHT_MODULE_DRIVE_MOTOR = 4; // NAV Set back right drive motor ID
     public static final int BACK_RIGHT_MODULE_STEER_MOTOR = 14; // NAV Set back right steer motor ID
     public static final int BACK_RIGHT_MODULE_STEER_ENCODER = 24; // NAV Set back right steer encoder ID
     public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(259.359741); // NAV Measure and set back right steer offset
+    // public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(-25.751901); // SWERVEE; // NAV Measure and set back right steer offset
+
 
     public static final int LEFT_SHOOTER = 5;
     public static final int RIGHT_SHOOTER = 6;

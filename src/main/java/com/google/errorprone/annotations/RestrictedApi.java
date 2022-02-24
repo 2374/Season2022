@@ -20,7 +20,6 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
-// TODO(b/157082874): Allow restricting entire classes.
 /**
  * Restrict this method to callsites with a allowlist annotation.
  *

@@ -5,7 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
+// import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -33,6 +33,8 @@ public class Robot extends TimedRobot {
 
     // UsbCamera driverCamera = CameraServer.startAutomaticCapture("Driver Camera", 0);
     // UsbCamera climberCamera = CameraServer.startAutomaticCapture("Climber Camera", 1);
+    // I think this will automatically start a camera streaming to the smart dashboard
+    CameraServer.startAutomaticCapture("Driver Camera", 0);
   }
 
   /**

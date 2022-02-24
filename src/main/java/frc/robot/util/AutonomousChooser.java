@@ -1,11 +1,11 @@
 package frc.robot.util;
 
-import edu.wpi.first.math.geometry.Pose2d;
+// import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+// import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
@@ -86,14 +86,14 @@ public class AutonomousChooser {
     //     // shootAtTarget(command, container, 2.5);
     // }
 
-    private void shootAtTarget(SequentialCommandGroup command, RobotContainer container, double timeToWait) {
+    // private void shootAtTarget(SequentialCommandGroup command, RobotContainer container, double timeToWait) {
         // command.addCommands(
         //         new TargetWithShooterCommand(container.getShooterSubsystem(), container.getVisionSubsystem(), container.getPrimaryController())
         //                 .alongWith(new VisionRotateToTargetCommand(container.getDrivetrainSubsystem(), container.getVisionSubsystem(), () -> 0.0, () -> 0.0))
         //                 .alongWith(
         //                         new WaitCommand(0.1).andThen(new AutonomousFeedCommand(container.getShooterSubsystem(), container.getFeederSubsystem(), container.getVisionSubsystem())))
         //                 .withTimeout(timeToWait));
-    }
+    // }
 
     private void follow(SequentialCommandGroup command, RobotContainer container, Trajectory trajectory) {
         // System.out.println("ROSS="+container.getDrivetrainSubsystem());
@@ -104,7 +104,7 @@ public class AutonomousChooser {
                 // .alongWith(new PrepareBallsToShootCommand(container.getIntakeSubsystem(), 1.0)));
     }
 
-    private void followAndIntake(SequentialCommandGroup command, RobotContainer container, Trajectory trajectory) {
+    // private void followAndIntake(SequentialCommandGroup command, RobotContainer container, Trajectory trajectory) {
         // command.addCommands(new InstantCommand(() -> container.getIntakeSubsystem().setTopExtended(true)));
         // command.addCommands(
         //         new FollowTrajectoryCommand(container.getDrivetrainSubsystem(), trajectory)
@@ -116,13 +116,13 @@ public class AutonomousChooser {
         //                                                         new FeederIntakeWhenNotFullCommand(container.getFeederSubsystem(), 1.0)
         //                                                 ))));
         // command.addCommands(new InstantCommand(() -> container.getIntakeSubsystem().setTopExtended(false)));
-    }
+    // }
 
-    private void resetRobotPose(SequentialCommandGroup command, RobotContainer container, Trajectory trajectory) {
-        command.addCommands(new InstantCommand(() -> container.getDrivetrainSubsystem().zeroGyroscope()));
-        command.addCommands(new InstantCommand(() -> container.getDrivetrainSubsystem().resetOdometry(
-                new Pose2d(0,0,container.getDrivetrainSubsystem().getGyroscopeRotation()))));
-    }
+    // private void resetRobotPose(SequentialCommandGroup command, RobotContainer container, Trajectory trajectory) {
+    //     command.addCommands(new InstantCommand(() -> container.getDrivetrainSubsystem().zeroGyroscope()));
+    //     command.addCommands(new InstantCommand(() -> container.getDrivetrainSubsystem().resetOdometry(
+    //             new Pose2d(0,0,container.getDrivetrainSubsystem().getGyroscopeRotation()))));
+    // }
 
     private enum AutonomousMode {
         POSITION_ONE,
