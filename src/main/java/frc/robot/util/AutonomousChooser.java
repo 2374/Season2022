@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 // import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 // import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 // import frc.robot.commands.*;
@@ -14,6 +15,7 @@ import frc.robot.RobotContainer;
 // import org.frcteam2910.common.math.RigidTransform2;
 // import org.frcteam2910.common.math.Rotation2;
 import frc.robot.commands.FollowTrajectoryCommand;
+import frc.robot.commands.AutoCommands.*;
 
 public class AutonomousChooser {
     private final AutonomousTrajectories trajectories;
@@ -54,7 +56,14 @@ public class AutonomousChooser {
         // resetRobotPose(command, container, trajectories.farLeftAutoPartOne());
         // command.addCommands(new HomeHoodMotorCommand(container.getShooterSubsystem()));
         //follow first trajectory and shoot
+
         follow(command, container, trajectories.farLeftAutoPartOne());
+        AutoIntakeOnCommand(command, container);
+        follow(command, container, trajectories.farLeftAutoPartTwo());
+        AutoIntakeOffCommand(command, container);
+        AutoShootCommand(command, container, 2);
+
+
         // shootAtTarget(command, container, 1.5);
         // //follow second trajectory and shoot
         // followAndIntake(command, container, trajectories.farLeftAutoPartTwo());
@@ -85,6 +94,21 @@ public class AutonomousChooser {
     // private void shootAtTarget(SequentialCommandGroup command, RobotContainer container) {
     //     // shootAtTarget(command, container, 2.5);
     // }
+
+    private void AutoIntakeOnCommand(SequentialCommandGroup command, RobotContainer container) {
+        command.addCommands(new AutoIntakeOnCommand(container.getIntakeSubsystem()));
+    }
+
+    private void AutoIntakeOffCommand(SequentialCommandGroup command, RobotContainer container) {
+        command.addCommands(new AutoIntakeOffCommand(container.getIntakeSubsystem()));
+    }
+
+    private void AutoShootCommand(SequentialCommandGroup command, RobotContainer container, double timeToWait) {
+        command.addCommands((new AutoShootCommand(container.getShooterSubsystem())).alongWith(
+            (new WaitCommand(0.5)).andThen(new AutoIndexOnCommand(container.getShooterSubsystem()))
+            .andThen(new WaitCommand(timeToWait)).andThen(new AutoIndexOffCommand(container.getShooterSubsystem())).
+            andThen(new AutoShootStopCommand(container.getShooterSubsystem()))));
+    }
 
     // private void shootAtTarget(SequentialCommandGroup command, RobotContainer container, double timeToWait) {
         // command.addCommands(

@@ -44,6 +44,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    
     try {
       autonomousTrajectories = new AutonomousTrajectories(DrivetrainSubsystem.TRAJECTORY_CONSTRAINTS);
     } catch (IOException e) {
@@ -147,6 +148,14 @@ public void executeAutoCommands(){
 
   public DrivetrainSubsystem getDrivetrainSubsystem() {
     return m_drivetrainSubsystem;
+  }
+
+  public IntakeSubsystem getIntakeSubsystem(){
+    return m_intakeSubsystem;
+  }
+
+  public ShooterSubsystem getShooterSubsystem(){
+    return m_shooterSubsystem;
   }
 
   public AutonomousChooser getAutonomousChooser() {

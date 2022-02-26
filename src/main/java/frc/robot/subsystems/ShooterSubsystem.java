@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import frc.robot.Constants;
 import frc.robot.vision.Limelight;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -47,19 +48,17 @@ public class ShooterSubsystem extends SubsystemBase {
     //control classes
 
     public void shootBallAtCurrentAcquiredTarget() {
-        mainGroup.set(-0.85);
         power = -.2;
-        // if (limelight.isLockedOn()) {
+        if (limelight.isLockedOn()) {
             double d = limelight.calculateDistance();
             System.out.println("TARGET DIST=" + d);
             power = -19.6 * Math.pow(d, 2) / (d * 1.73205080757 - 2.4384);
             System.out.println("power=" + power);
-        // }
-        // mainGroup.set(power);
+        }
+        mainGroup.set(power);
     }
 
     public void stop(){
-        indexGroup.set(0);
         mainGroup.set(0);
     }
     

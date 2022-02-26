@@ -73,6 +73,8 @@ public class AutonomousTrajectories {
 
         // private final Trajectory simpleShootThree;
 
+        
+
         public AutonomousTrajectories(TrajectoryConstraint[] trajectoryConstraints) throws IOException {
                 TrajectoryConstraint[] slowConstraints = Arrays.copyOf(trajectoryConstraints,
                                 trajectoryConstraints.length + 1);
@@ -86,31 +88,35 @@ public class AutonomousTrajectories {
                                                 // Add kinematics to ensure max speed is actually obeyed
                                                 .setKinematics(DrivetrainSubsystem.getKinematics());
 
-                farLeftAutoPartOne =
-
-                                // new SimplePathBuilder(new Vector2(509.0, -155.0), Rotation2.ZERO)
-                                // .lineTo(new Vector2(468.0, -67.34))
-                                // .build(),
-                                // trajectoryConstraints, SAMPLE_DISTANCE
-                                TrajectoryGenerator.generateTrajectory(
+                
+                
+                farLeftAutoPartOne = TrajectoryGenerator.generateTrajectory(
                                                 // Start at the origin facing the +X direction
                                                 new Pose2d(0, 0, new Rotation2d(0)),
                                                 // Pass through these two interior waypoints, making an 's' curve path
                                                 List.of(
-                                                                new Translation2d(0.5, 0.5)),
-                                                                // new Translation2d(1.2668, 0.7620),
-                                                                // new Translation2d(1.3668, 1.0420)),
-                                                new Pose2d(1.0, 1.0, new Rotation2d(0)), config);
+                                                        // new Rotation2d(2.705),
+                                                        // new AutoIntakeOnCommand(m_intakeSubsystem),
+                                                        // new Translation2d(1.93, new Rotation2d(2.705)),
+                                                        // new AutoIntakeOffCommand(m_intakeSubsystem),
+                                                        // new Rotation2d(-.57),
+                                                        // new SpinToTargetCommand(m_turretSubsystem),
+                                                        // new AutoShootCommand(m_shooterSubsystem),
+                                                        // new WaitCommand(3),
+                                                        // new AutoShootStopCommand(m_shooterSubsystem)
+                                                        new Translation2d(.1, new Rotation2d(-3.28122))
+                                                        
+                                                ),                                                       
+                                                new Pose2d(.2, 0, new Rotation2d(-3.28122)), config);
 
                 farLeftAutoPartTwo = TrajectoryGenerator.generateTrajectory(
                         // Start at the origin facing the +X direction
-                        new Pose2d(0, 0, new Rotation2d(0)),
+                                                new Pose2d(0, 0, new Rotation2d(0)),
                         // Pass through these two interior waypoints, making an 's' curve path
-                        List.of(
-                                        new Translation2d(1.1668, 0.0000),
-                                        new Translation2d(1.2668, 0.7620),
-                                        new Translation2d(1.3668, 1.5420)),
-                        new Pose2d(2.0, 2.5, new Rotation2d(0)), config);
+                                                List.of(
+                                                        new Translation2d(1.8304, 0)
+                                                ),
+                                                new Pose2d(1.9304, 0, new Rotation2d()), config);
 
                 farLeftAutoPartThree = TrajectoryGenerator.generateTrajectory(
                         // Start at the origin facing the +X direction
