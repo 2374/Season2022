@@ -18,9 +18,9 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public IntakeSubsystem(){
         motor = new WPI_TalonFX(Constants.INTAKE_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
-        compressor = new Compressor(Constants.PCM_INTAKE, PneumaticsModuleType.REVPH);
-        leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.REVPH, Constants.FORWARD_CHANNEL_LEFT, Constants.REVERSE_CHANNEL_LEFT);
-        rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.REVPH, Constants.FORWARD_CHANNEL_RIGHT, Constants.REVERSE_CHANNEL_RIGHT);
+        compressor = new Compressor(Constants.PCM_INTAKE, Constants.PCM_TYPE);
+        leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, Constants.PCM_TYPE, Constants.FORWARD_CHANNEL_LEFT, Constants.REVERSE_CHANNEL_LEFT);
+        rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, Constants.PCM_TYPE, Constants.FORWARD_CHANNEL_RIGHT, Constants.REVERSE_CHANNEL_RIGHT);
         compressor.enableDigital();
     }
     

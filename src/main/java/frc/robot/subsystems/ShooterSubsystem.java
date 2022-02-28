@@ -48,7 +48,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //control classes
 
     public void shootBallAtCurrentAcquiredTarget() {
-        power = -.2;
+        power = .85;
         if (limelight.isLockedOn()) {
             double d = limelight.calculateDistance();
             System.out.println("TARGET DIST=" + d);

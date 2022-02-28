@@ -1,5 +1,6 @@
 package frc.robot.vision;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.Constants;
@@ -22,7 +23,7 @@ public class Limelight {
      //final double DESIRED_TARGET_AREA = 23.0;        // Area of the target when the robot reaches the wall
     static final double MAX_DRIVE = 0.7;                   // Simple speed limit so we don't drive too fast
     
-    private static NetworkTableInstance table = null;
+    private static NetworkTableInstance table = null; //NetworkTableInstance.getDefault().getTable("limelight");
 
 	/**
 	 * Light modes for Limelight.
