@@ -61,10 +61,13 @@ public class TurretSubsystem extends SubsystemBase {
      */
     public void spinToTarget() {
         Limelight.setLedMode(LightMode.eOn);
+        //System.out.println("spin");
         limelight.updateTracking();
         boolean found = false;
+        System.out.println(Limelight.getTx());
         while (limelight.hasValidTarget() && !found) {
-            if (Math.abs(limelight.getHorizontalTargetAngle()) > Constants.LIMELIGHT_TOLERANCE) { // make tolerance dynamic
+            System.out.println(limelight.getTurnValue());
+            if (Math.abs(limelight.getTurnValue()) > Constants.LIMELIGHT_TOLERANCE) { // make tolerance dynamic
                 System.out.println("Turn Value: " + limelight.getTurnValue());
                 if (limelight.getTurnValue() > Constants.LIMELIGHT_TOLERANCE) {
                     spinnerMotor.set(0.05);

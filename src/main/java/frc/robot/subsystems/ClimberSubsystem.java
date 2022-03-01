@@ -3,9 +3,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-// import edu.wpi.first.wpilibj.Compressor;
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
-// import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,9 +19,9 @@ public class ClimberSubsystem extends SubsystemBase {
     public WPI_TalonFX leftArticulating;
     public WPI_TalonFX rightArticulating;
 
-    // public Compressor compressor;
-    // public DoubleSolenoid leftPiston;
-    // public DoubleSolenoid rightPiston;
+    public Compressor compressor;
+    public DoubleSolenoid leftPiston;
+    public DoubleSolenoid rightPiston;
 
     public MotorControllerGroup fixedGroup;
     public MotorControllerGroup articulatingGroup;
@@ -39,13 +39,11 @@ public class ClimberSubsystem extends SubsystemBase {
         leftArticulating.setNeutralMode(NeutralMode.Brake);
         rightArticulating.setNeutralMode(NeutralMode.Brake);
 
-        // compressor = new Compressor(Constants.PCM);
-    
-        // leftPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
-        // rightPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
+        leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, Constants.PCM_TYPE, Constants.FORWARD_CHANNEL_LEFT_ARM, Constants.REVERSE_CHANNEL_LEFT_ARM);
+        rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, Constants.PCM_TYPE, Constants.FORWARD_CHANNEL_RIGHT_ARM, Constants.REVERSE_CHANNEL_RIGHT_ARM);
         
-        // leftPiston.set(DoubleSolenoid.Value.kOff);
-        // rightPiston.set(DoubleSolenoid.Value.kOff);
+        leftPiston.set(DoubleSolenoid.Value.kReverse);
+        rightPiston.set(DoubleSolenoid.Value.kReverse);
 
         fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
         articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);

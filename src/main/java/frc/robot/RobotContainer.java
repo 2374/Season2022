@@ -61,7 +61,7 @@ public class RobotContainer {
             m_drivetrainSubsystem,
             () -> -modifyAxis(m_controller.getLeftY()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             () -> -modifyAxis(m_controller.getLeftX()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-            () -> -modifyAxis(m_ord.getRightX()) * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND
+            () -> -modifyAxis(m_controller /* m_ord */.getRightX()) * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND
     ));
 
     // Configure the button bindings
@@ -90,6 +90,7 @@ public class RobotContainer {
     new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenHeld(new RetractFixedArmsCommand(m_climberSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_Y_BUTTON_ID).whenPressed(new RetractIntakeCommand(m_intakeSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_B_BUTTON_ID).whenPressed(new ExtendIntakeCommand(m_intakeSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_JOYSTICK_BUTTON_ID).whenPressed(new DribbleCommand(m_shooterSubsystem));
 
     // new Button(m_ord::getAButtonPressed).whenPressed(m_turretSubsystem::spinToTarget);
     // new Button(m_ord::getRightBumperPressed).whenPressed(m_shooterSubsystem::shoot);
@@ -131,7 +132,7 @@ public void executeAutoCommands(){
     }
   }
 
-  private static double modifyAxis(double value) {
+  private double modifyAxis(double value) {
     // Deadband
     value = deadband(value, 0.05);
 
@@ -139,7 +140,7 @@ public void executeAutoCommands(){
     value = Math.copySign(value * value, value);
     
     // TURBO MODE!
-    if (m_controller.getRightBumper()) {
+    if (m_drivetrainSubsystem.getTurboMode()) {
       return value;
     } else {
       return 0.5*value;

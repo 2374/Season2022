@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -18,9 +18,9 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public IntakeSubsystem(){
         motor = new WPI_TalonFX(Constants.INTAKE_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
-        compressor = new Compressor(Constants.PCM_INTAKE, PneumaticsModuleType.REVPH);
-        leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.REVPH, Constants.FORWARD_CHANNEL_LEFT, Constants.REVERSE_CHANNEL_LEFT);
-        rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.REVPH, Constants.FORWARD_CHANNEL_RIGHT, Constants.REVERSE_CHANNEL_RIGHT);
+        compressor = new Compressor(Constants.PCM_INTAKE, Constants.PCM_TYPE);
+        leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, Constants.PCM_TYPE, Constants.FORWARD_CHANNEL_LEFT, Constants.REVERSE_CHANNEL_LEFT);
+        rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, Constants.PCM_TYPE, Constants.FORWARD_CHANNEL_RIGHT, Constants.REVERSE_CHANNEL_RIGHT);
         compressor.enableDigital();
     }
     
