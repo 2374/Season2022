@@ -6,7 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import frc.robot.Constants;
 import frc.robot.vision.Limelight;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -18,6 +19,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
     private MotorControllerGroup indexGroup;
     private MotorControllerGroup mainGroup;
+
+    private DigitalInput intake = new DigitalInput(0);
+    private DigitalInput shooter = new DigitalInput(1);
 
     private ShooterSubsystem instance;
     private double power;
@@ -58,6 +62,10 @@ public class ShooterSubsystem extends SubsystemBase {
         mainGroup.set(power);
     }
 
+    public void dribble(){
+        mainGroup.set(.2);
+    }
+
     public void stop(){
         mainGroup.set(0);
     }
@@ -74,5 +82,13 @@ public class ShooterSubsystem extends SubsystemBase {
     public void indexerOff(){
         System.out.println("index off");
         indexGroup.set(0);
+    }
+
+    public boolean getIntakeSensor(){
+        return intake.get();
+    }
+
+    public boolean getShooterSensor(){
+        return shooter.get();
     }
 }

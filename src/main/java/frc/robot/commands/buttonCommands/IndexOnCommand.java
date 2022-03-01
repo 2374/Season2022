@@ -9,6 +9,8 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class IndexOnCommand extends CommandBase{
     private final ShooterSubsystem m_shooterSubsystem;
 
+    private static boolean on;
+
     /** 
      * Turn on the indexer for a given shooter subsystem for the length of
      * the command.
@@ -24,6 +26,7 @@ public class IndexOnCommand extends CommandBase{
      */
     @Override
     public void execute() {
+        on = true;
         m_shooterSubsystem.indexerOn();
     }
 
@@ -34,6 +37,11 @@ public class IndexOnCommand extends CommandBase{
      */
     @Override
     public void end(boolean interrupted) {
+        on = false;
         m_shooterSubsystem.indexerOff();
+    }
+
+    public static boolean getOn(){
+        return on;
     }
 }
