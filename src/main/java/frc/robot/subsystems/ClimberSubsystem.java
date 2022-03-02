@@ -4,9 +4,12 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.vision.Limelight;
+import frc.robot.vision.Limelight.LightMode;
 
 // Does whatever a spider can
 
@@ -14,38 +17,38 @@ public class ClimberSubsystem extends SubsystemBase {
 
     public WPI_TalonFX leftFixed;
     public WPI_TalonFX rightFixed;
-    public WPI_TalonFX leftArticulating;
-    public WPI_TalonFX rightArticulating;
+    // public WPI_TalonFX leftArticulating;
+    // public WPI_TalonFX rightArticulating;
 
     public DoubleSolenoid leftPiston;
     public DoubleSolenoid rightPiston;
 
     public MotorControllerGroup fixedGroup;
-    public MotorControllerGroup articulatingGroup;
+    // public MotorControllerGroup articulatingGroup;
     
     private ClimberSubsystem instance;
     
     public ClimberSubsystem() {
         leftFixed = new WPI_TalonFX(Constants.LEFT_FIXED_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
         rightFixed = new WPI_TalonFX(Constants.RIGHT_FIXED_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
-        leftArticulating = new WPI_TalonFX(Constants.LEFT_ARTICULATING_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
-        rightArticulating = new WPI_TalonFX(Constants.RIGHT_ARTICULATING_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
+        // leftArticulating = new WPI_TalonFX(Constants.LEFT_ARTICULATING_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
+        // rightArticulating = new WPI_TalonFX(Constants.RIGHT_ARTICULATING_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
 
         leftFixed.setNeutralMode(NeutralMode.Brake);
         rightFixed.setNeutralMode(NeutralMode.Brake);
-        leftArticulating.setNeutralMode(NeutralMode.Brake);
-        rightArticulating.setNeutralMode(NeutralMode.Brake);
+        // leftArticulating.setNeutralMode(NeutralMode.Brake);
+        // rightArticulating.setNeutralMode(NeutralMode.Brake);
 
         // compressor = new Compressor(Constants.PCM);
     
-        // leftPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
-        // rightPiston = new DoubleSolenoid(30, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
+        leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_LEFT_ARM, Constants.REVERSE_CHANNEL_LEFT_ARM);
+        rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_RIGHT_ARM, Constants.REVERSE_CHANNEL_RIGHT_ARM);
         
-        // leftPiston.set(DoubleSolenoid.Value.kOff);
-        // rightPiston.set(DoubleSolenoid.Value.kOff);
+        leftPiston.set(DoubleSolenoid.Value.kOff);
+        rightPiston.set(DoubleSolenoid.Value.kOff);
 
-        // fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
-        articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
+        fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
+        // articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
 
 
     }
@@ -58,14 +61,25 @@ public class ClimberSubsystem extends SubsystemBase {
         return instance;
     }
 
+    public void deployFixedArms(){
+        leftPiston.set(DoubleSolenoid.Value.kForward);
+        rightPiston.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void undeployFixedArms(){
+        leftPiston.set(DoubleSolenoid.Value.kReverse);
+        rightPiston.set(DoubleSolenoid.Value.kReverse);
+    }
+
     public void extendFixedArms(){
         System.out.println("Extend="+rightFixed.getSelectedSensorPosition());
         // if (rightFixed.getSelectedSensorPosition() <= Constants.FIXED_ARM_UPPER_LIMIT){
         //     rightFixed.set(0.4);
         // } else {
-            rightFixed.set(0.6);
+            fixedGroup.set(0.6);
             
         // }
+        Limelight.setLedMode(LightMode.eOff);
     }
 
     public void retractFixedArms(){
@@ -73,7 +87,7 @@ public class ClimberSubsystem extends SubsystemBase {
         // if (rightFixed.getSelectedSensorPosition() >= Constants.FIXED_ARM_LOWER_LIMIT) {
         //     rightFixed.set(-1.0);
         // } else {
-            rightFixed.set(-0.60);
+            fixedGroup.set(-0.60);
         // }
     }
 
@@ -93,21 +107,21 @@ public class ClimberSubsystem extends SubsystemBase {
         fixedGroup.set(0.0);
     } */
 
-    public void extendArticulatingArms(){
-        if (leftArticulating.getSelectedSensorPosition() <= Constants.ARTICULATING_ARM_UPPER_LIMIT) {
-            articulatingGroup.set(0.1);
-        } else {
-            articulatingGroup.set(0);
-        }
-    }
+    // public void extendArticulatingArms(){
+    //     if (leftArticulating.getSelectedSensorPosition() <= Constants.ARTICULATING_ARM_UPPER_LIMIT) {
+    //         articulatingGroup.set(0.1);
+    //     } else {
+    //         articulatingGroup.set(0);
+    //     }
+    // }
 
-    public void retractArticulatingArms(){
-        if (leftArticulating.getSelectedSensorPosition() >= Constants.ARTICULATING_ARM_LOWER_LIMIT) {
-            articulatingGroup.set(-0.1);
-        } else {
-            articulatingGroup.set(0);
-        }
-    }
+    // public void retractArticulatingArms(){
+    //     if (leftArticulating.getSelectedSensorPosition() >= Constants.ARTICULATING_ARM_LOWER_LIMIT) {
+    //         articulatingGroup.set(-0.1);
+    //     } else {
+    //         articulatingGroup.set(0);
+    //     }
+    // }
 
     /* public void stretchArticulatingArms() {
         while (leftArticulating.getSelectedSensorPosition() <= Constants.ARTICULATING_ARM_UPPER_LIMIT) {
@@ -143,12 +157,11 @@ public class ClimberSubsystem extends SubsystemBase {
     // } 
     
     public void stopFixedArms(){
-        System.out.println("stop");
-        rightFixed.set(0.0);
+        fixedGroup.set(0.0);
     }
 
-    public void stopArticulatingArms() {
-        articulatingGroup.set(0.0);
-    }
+    // public void stopArticulatingArms() {
+    //     articulatingGroup.set(0.0);
+    // }
 
 }

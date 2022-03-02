@@ -80,10 +80,10 @@ public final class Constants {
     public static final int XBOX_CONTROLLER_PORT = 0;
     public static final int XBOX_2_CONTROLLER_PORT = 1;
 
-    public static final int LEFT_FIXED_MOTOR = 15;
+    public static final int LEFT_FIXED_MOTOR = 17;
     public static final int RIGHT_FIXED_MOTOR = 16;
     public static final int LEFT_ARTICULATING_MOTOR = 18;
-    public static final int RIGHT_ARTICULATING_MOTOR = 17;
+    public static final int RIGHT_ARTICULATING_MOTOR = 15;
 
     public static final int TOP_INDEX_MOTOR = 19;
     public static final int BOTTOM_INDEX_MOTOR = 26;

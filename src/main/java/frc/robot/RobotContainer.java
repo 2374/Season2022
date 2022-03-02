@@ -93,9 +93,11 @@ public class RobotContainer {
     //Shooter
     new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenHeld(new ShootCommand(m_shooterSubsystem));
     // new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_JOYSTICK_BUTTON_ID).whenPressed(new DribbleCommand(m_shooterSubsystem));
-//Climber
+    //Climber
     new JoystickButton(m_controller, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new ExtendFixedArmsCommand(m_climberSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new RetractFixedArmsCommand(m_climberSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_X_BUTTON_ID).whenHeld(new UnDeployFixedArmsCommand(m_climberSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_B_BUTTON_ID).whenHeld(new DeployFixedArmsCommand(m_climberSubsystem));
     
     // new Button(m_ord::getAButtonPressed).whenPressed(m_turretSubsystem::spinToTarget);
     // new Button(m_ord::getRightBumperPressed).whenPressed(m_shooterSubsystem::shoot);

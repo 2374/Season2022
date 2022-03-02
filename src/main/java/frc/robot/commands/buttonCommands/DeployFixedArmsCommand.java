@@ -3,7 +3,7 @@ package frc.robot.commands.buttonCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ExtendFixedArmsCommand extends CommandBase{
+public class DeployFixedArmsCommand extends CommandBase{
     private final ClimberSubsystem m_climberSubsystem;
 
     /** 
@@ -11,7 +11,7 @@ public class ExtendFixedArmsCommand extends CommandBase{
      * the command.
      * @param climberSubsystem Which climber subsystem should the climber be engaged for?
      */
-    public ExtendFixedArmsCommand(ClimberSubsystem climberSubsystem) {
+    public DeployFixedArmsCommand(ClimberSubsystem climberSubsystem) {
         this.m_climberSubsystem = climberSubsystem;
         addRequirements(climberSubsystem);
     }
@@ -22,7 +22,6 @@ public class ExtendFixedArmsCommand extends CommandBase{
     @Override
     public void execute() {
         m_climberSubsystem.deployFixedArms();
-        m_climberSubsystem.extendFixedArms();
     }
 
     
