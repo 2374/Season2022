@@ -97,12 +97,15 @@ public final class Constants {
     public static final int ARTICULATING_ARM_UPPER_LIMIT = 24576;
     public static final int ARTICULATING_ARM_LOWER_LIMIT = 0;
 
-	public static final double LIMELIGHT_TOLERANCE = 0.03;
+	public static final double LIMELIGHT_TOLERANCE = 0.1;
     public static final int PCM_INTAKE = 30;
     public static final int TURRET_MOTOR = 8;
     public static final double TURRET_POWER = 0.2; // 50% power
 
-
+    public static final int REVERSE_CHANNEL_LEFT_ARM = 0;
+    public static final int REVERSE_CHANNEL_RIGHT_ARM = 2;
+    public static final int FORWARD_CHANNEL_LEFT_ARM = 1;
+    public static final int FORWARD_CHANNEL_RIGHT_ARM = 3;
     public static final int FORWARD_CHANNEL_LEFT = 4;
     public static final int REVERSE_CHANNEL_LEFT = 5;
     public static final int FORWARD_CHANNEL_RIGHT = 6;

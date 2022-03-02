@@ -33,7 +33,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void enableIntake() {
-        motor.set(0.4);
+        motor.set(0.6);
     }
 
     public void stop() {
@@ -41,13 +41,14 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void extendPistons() {
-        leftPiston.set(DoubleSolenoid.Value.kForward);
-        rightPiston.set(DoubleSolenoid.Value.kForward);
+        leftPiston.set(DoubleSolenoid.Value.kReverse);
+        rightPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void retractPistons() {
-        leftPiston.set(DoubleSolenoid.Value.kReverse);
-        rightPiston.set(DoubleSolenoid.Value.kReverse);
+        
+        leftPiston.set(DoubleSolenoid.Value.kForward);
+        rightPiston.set(DoubleSolenoid.Value.kForward);
     }
 
 }

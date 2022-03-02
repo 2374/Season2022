@@ -3,9 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-// import edu.wpi.first.wpilibj.Compressor;
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
-// import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,9 +17,8 @@ public class ClimberSubsystem extends SubsystemBase {
     public WPI_TalonFX leftArticulating;
     public WPI_TalonFX rightArticulating;
 
-    // public Compressor compressor;
-    // public DoubleSolenoid leftPiston;
-    // public DoubleSolenoid rightPiston;
+    public DoubleSolenoid leftPiston;
+    public DoubleSolenoid rightPiston;
 
     public MotorControllerGroup fixedGroup;
     public MotorControllerGroup articulatingGroup;
@@ -29,10 +26,10 @@ public class ClimberSubsystem extends SubsystemBase {
     private ClimberSubsystem instance;
     
     public ClimberSubsystem() {
-        leftFixed = new WPI_TalonFX(Constants.LEFT_FIXED_MOTOR);
-        rightFixed = new WPI_TalonFX(Constants.RIGHT_FIXED_MOTOR);
-        leftArticulating = new WPI_TalonFX(Constants.LEFT_ARTICULATING_MOTOR);
-        rightArticulating = new WPI_TalonFX(Constants.RIGHT_ARTICULATING_MOTOR);
+        leftFixed = new WPI_TalonFX(Constants.LEFT_FIXED_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
+        rightFixed = new WPI_TalonFX(Constants.RIGHT_FIXED_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
+        leftArticulating = new WPI_TalonFX(Constants.LEFT_ARTICULATING_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
+        rightArticulating = new WPI_TalonFX(Constants.RIGHT_ARTICULATING_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
 
         leftFixed.setNeutralMode(NeutralMode.Brake);
         rightFixed.setNeutralMode(NeutralMode.Brake);
@@ -47,7 +44,7 @@ public class ClimberSubsystem extends SubsystemBase {
         // leftPiston.set(DoubleSolenoid.Value.kOff);
         // rightPiston.set(DoubleSolenoid.Value.kOff);
 
-        fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
+        // fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
         articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
 
 
@@ -62,19 +59,22 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void extendFixedArms(){
-        if (leftFixed.getSelectedSensorPosition() <= Constants.FIXED_ARM_UPPER_LIMIT){
-            fixedGroup.set(0.4);
-        } else {
-            fixedGroup.set(0);
-        }
+        System.out.println("Extend="+rightFixed.getSelectedSensorPosition());
+        // if (rightFixed.getSelectedSensorPosition() <= Constants.FIXED_ARM_UPPER_LIMIT){
+        //     rightFixed.set(0.4);
+        // } else {
+            rightFixed.set(0.6);
+            
+        // }
     }
 
     public void retractFixedArms(){
-        if (leftFixed.getSelectedSensorPosition() >= Constants.FIXED_ARM_LOWER_LIMIT) {
-            fixedGroup.set(-1.0);
-        } else {
-            fixedGroup.set(0);
-        }
+        System.out.println("Retract="+rightFixed.getSelectedSensorPosition());
+        // if (rightFixed.getSelectedSensorPosition() >= Constants.FIXED_ARM_LOWER_LIMIT) {
+        //     rightFixed.set(-1.0);
+        // } else {
+            rightFixed.set(-0.60);
+        // }
     }
 
     /* public void stretchFixedArms() {
@@ -126,10 +126,10 @@ public class ClimberSubsystem extends SubsystemBase {
     
     
     // moves articulating arms forward
-    // public void angleArticulatingArms() {
-    //     leftPiston.set(DoubleSolenoid.Value.kForward);
-    //     rightPiston.set(DoubleSolenoid.Value.kForward);
-    // }
+    public void angleArticulatingArms() {
+        leftPiston.set(DoubleSolenoid.Value.kForward);
+        rightPiston.set(DoubleSolenoid.Value.kForward);
+    }
 
     // // moves articulating arms in reverse
     // public void reverseArticulatingArms() {
@@ -143,11 +143,12 @@ public class ClimberSubsystem extends SubsystemBase {
     // } 
     
     public void stopFixedArms(){
-        fixedGroup.set(0);
+        System.out.println("stop");
+        rightFixed.set(0.0);
     }
 
     public void stopArticulatingArms() {
-        articulatingGroup.set(0);
+        articulatingGroup.set(0.0);
     }
 
 }

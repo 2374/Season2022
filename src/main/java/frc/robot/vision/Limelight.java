@@ -38,7 +38,7 @@ public class Limelight {
        
         
         // for horizontal alignment limelight pipeline 1 is the ball, pipeline two is the hatch 
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(2); // change the setNumber to the appropriate target
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0); // change the setNumber to the appropriate target
         final double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         final double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
         // final double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
@@ -59,7 +59,6 @@ public class Limelight {
         turnValue = steer_cmd;
         verticalTargetAngle = ty;
         horizontalTargetAngle = tx;
-        System.out.println("LIMELIGHT="+tx);
   
         // // try to drive forward until the target area reaches our desired area
         // // This should be replaced by LIDAR call

@@ -59,7 +59,6 @@ public class AutonomousTrajectories {
 
         private Trajectory farLeftAutoPartOne;
         private Trajectory farLeftAutoPartTwo;
-        private Trajectory farLeftAutoPartThree;
         // private Trajectory eightBallAutoPartFour;
         // private Trajectory tenBallAutoPartOne;
         // private Trajectory tenBallAutoPartTwo;
@@ -104,7 +103,7 @@ public class AutonomousTrajectories {
                                                         // new AutoShootCommand(m_shooterSubsystem),
                                                         // new WaitCommand(3),
                                                         // new AutoShootStopCommand(m_shooterSubsystem)
-                                                        new Translation2d(.1, new Rotation2d(-3.28122))
+                                                        new Translation2d(.1, new Rotation2d(-1.68122))
                                                         
                                                 ),                                                       
                                                 new Pose2d(.2, 0, new Rotation2d(-3.28122)), config);
@@ -117,16 +116,6 @@ public class AutonomousTrajectories {
                                                         new Translation2d(1.8304, 0)
                                                 ),
                                                 new Pose2d(1.9304, 0, new Rotation2d()), config);
-
-                farLeftAutoPartThree = TrajectoryGenerator.generateTrajectory(
-                        // Start at the origin facing the +X direction
-                        new Pose2d(0, 0, new Rotation2d(0)),
-                        // Pass through these two interior waypoints, making an 's' curve path
-                        List.of(
-                                        new Translation2d(1.1668, 0.0000),
-                                        new Translation2d(1.2668, 0.7620),
-                                        new Translation2d(1.3668, 1.5420)),
-                        new Pose2d(2.0, 2.5, new Rotation2d(0)), config);
 
 
                 // eightBallAutoPartTwo = new Trajectory(
@@ -208,10 +197,6 @@ public class AutonomousTrajectories {
 
         public Trajectory farLeftAutoPartTwo() {
                 return farLeftAutoPartTwo;
-        }
-
-        public Trajectory farLeftAutoPartThree() {
-                return farLeftAutoPartThree;
         }
 
         

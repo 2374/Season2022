@@ -116,7 +116,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         private ChassisSpeeds m_chassisSpeeds = new ChassisSpeeds(0.0, 0.0, 0.0);
 
-        private static Boolean TurboMode;
+        private Boolean TurboMode = false;
 
 
 
