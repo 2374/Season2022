@@ -20,8 +20,15 @@ public class DelayXSecondsCommand extends CommandBase{
      */
     @Override
     public void execute() {
-        long sTime1 = System.currentTimeMillis();
-        while ((sTime1 + 1000*m_numberOfSeconds) > System.currentTimeMillis()) { }
+        // use a wait() because it can be interrupted if needbe
+        try {
+            wait(1000*m_numberOfSeconds);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // long sTime1 = System.currentTimeMillis();
+        // while ((sTime1 + 1000*m_numberOfSeconds) > System.currentTimeMillis()) { }
     }
 
     

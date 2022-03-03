@@ -20,8 +20,6 @@ public class ShootCommand extends ParallelRaceGroup{
      */
     public ShootCommand(ShooterSubsystem shooterSubsystem, TurretSubsystem turretSubsystem, IndexerSubsystem indexerSubsystem,
             boolean justShootDontAlign) {
-        addRequirements(shooterSubsystem);
-        addRequirements(turretSubsystem);
         if (justShootDontAlign) {
             addCommands(
                     // start the shooting

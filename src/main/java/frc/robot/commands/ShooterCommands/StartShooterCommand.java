@@ -28,7 +28,7 @@ public class StartShooterCommand extends CommandBase{
      */
     @Override
     public void execute() {
-        m_shooterSubsystem.shootBallAtCurrentAcquiredTarget(m_justShootDontAlign);
+        m_shooterSubsystem.shootBallAtCurrentAcquiredTarget(m_justShootDontAlign); // this will start the shooter at the desired speed
     }
 
     
@@ -38,6 +38,14 @@ public class StartShooterCommand extends CommandBase{
      */
     @Override
     public void end(boolean interrupted) {
-        
+        m_shooterSubsystem.stop(); // make sure we stop the shooter from spinning
+    }
+
+    /**
+     * Never be finished until this command is interrupted
+     */
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 }

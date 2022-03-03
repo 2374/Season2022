@@ -25,6 +25,12 @@ public class FeedBallsCommand extends CommandBase{
     @Override
     public void execute() {
         m_indexerSubsystem.sendTheBalls();
+        // this should be run once and then it will exit
+        //
+        // another way to do this would be to have sendTheBalls just run
+        // the motors and we can override the isFinished() method to
+        // check the sensors and we are not finished if either of the
+        // sensors has more work to do.
     }
 
     

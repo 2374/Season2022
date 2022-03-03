@@ -30,11 +30,19 @@ public class IndexerSubsystem extends SubsystemBase {
     //control classes
 
     public void sendTheBalls() {
+        indexerOn();
         // is either sensor set then there is work to do
-        while (intakeSensor.get() || shooterSensor.get()){
-            indexerOn();
+        while (getIntakeSensor() || getShooterSensor()){
+            // wait 2 seconds before testing both sensors again
+            // this should give the ball enough time to clear the system
+            try {
+                wait(2000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
-        stop();
+        indexerOff();
     }
     
     public void stop(){
@@ -59,5 +67,9 @@ public class IndexerSubsystem extends SubsystemBase {
 
     public boolean getIntakeSensor(){
         return intakeSensor.get();
+    }
+
+    public boolean getShooterSensor(){
+        return shooterSensor.get();
     }
 }
