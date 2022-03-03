@@ -57,6 +57,7 @@ public class AutonomousTrajectories {
         // .lineTo(new Vector2(324.0, -134.25), Rotation2.fromDegrees(0.0))
         // .build();
 
+        private Trajectory twoMetersBack;
         private Trajectory farLeftAutoPartOne;
         private Trajectory farLeftAutoPartTwo;
         // private Trajectory eightBallAutoPartFour;
@@ -73,7 +74,6 @@ public class AutonomousTrajectories {
         // private final Trajectory simpleShootThree;
 
         
-
         public AutonomousTrajectories(TrajectoryConstraint[] trajectoryConstraints) throws IOException {
                 TrajectoryConstraint[] slowConstraints = Arrays.copyOf(trajectoryConstraints,
                                 trajectoryConstraints.length + 1);
@@ -82,41 +82,45 @@ public class AutonomousTrajectories {
                 // MaxAccelerationConstraint(4.0 * 12.0);
 
                 TrajectoryConfig config = new TrajectoryConfig(
-                                DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND/2.0,
-                                DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND/4.0)
+                                DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND / 2.0,
+                                DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND / 4.0)
                                                 // Add kinematics to ensure max speed is actually obeyed
                                                 .setKinematics(DrivetrainSubsystem.getKinematics());
 
-                
-                
                 farLeftAutoPartOne = TrajectoryGenerator.generateTrajectory(
-                                                // Start at the origin facing the +X direction
-                                                new Pose2d(0, 0, new Rotation2d(0)),
-                                                // Pass through these two interior waypoints, making an 's' curve path
-                                                List.of(
-                                                        // new Rotation2d(2.705),
-                                                        // new AutoIntakeOnCommand(m_intakeSubsystem),
-                                                        // new Translation2d(1.93, new Rotation2d(2.705)),
-                                                        // new AutoIntakeOffCommand(m_intakeSubsystem),
-                                                        // new Rotation2d(-.57),
-                                                        // new SpinToTargetCommand(m_turretSubsystem),
-                                                        // new AutoShootCommand(m_shooterSubsystem),
-                                                        // new WaitCommand(3),
-                                                        // new AutoShootStopCommand(m_shooterSubsystem)
-                                                        new Translation2d(.1, new Rotation2d(-1.68122))
-                                                        
-                                                ),                                                       
-                                                new Pose2d(.2, 0, new Rotation2d(-3.28122)), config);
+                                // Start at the origin facing the +X direction
+                                new Pose2d(0, 0, new Rotation2d(0)),
+                                // Pass through these two interior waypoints, making an 's' curve path
+                                List.of(
+                                                // new Rotation2d(2.705),
+                                                // new AutoIntakeOnCommand(m_intakeSubsystem),
+                                                // new Translation2d(1.93, new Rotation2d(2.705)),
+                                                // new AutoIntakeOffCommand(m_intakeSubsystem),
+                                                // new Rotation2d(-.57),
+                                                // new SpinToTargetCommand(m_turretSubsystem),
+                                                // new AutoShootCommand(m_shooterSubsystem),
+                                                // new WaitCommand(3),
+                                                // new AutoShootStopCommand(m_shooterSubsystem)
+                                                new Translation2d(.1, new Rotation2d(-1.68122))
+
+                                ),
+                                new Pose2d(.2, 0, new Rotation2d(-3.28122)), config);
 
                 farLeftAutoPartTwo = TrajectoryGenerator.generateTrajectory(
-                        // Start at the origin facing the +X direction
-                                                new Pose2d(0, 0, new Rotation2d(0)),
-                        // Pass through these two interior waypoints, making an 's' curve path
-                                                List.of(
-                                                        new Translation2d(1.8304, 0)
-                                                ),
-                                                new Pose2d(1.9304, 0, new Rotation2d()), config);
+                                // Start at the origin facing the +X direction
+                                new Pose2d(0, 0, new Rotation2d(0)),
+                                // Pass through these two interior waypoints, making an 's' curve path
+                                List.of(
+                                                new Translation2d(1.8304, 0)),
+                                new Pose2d(1.9304, 0, new Rotation2d()), config);
 
+                twoMetersBack = TrajectoryGenerator.generateTrajectory(
+                                // Start at the origin facing the +X direction
+                                new Pose2d(0, 0, new Rotation2d(0)),
+                                List.of(
+                                     new Translation2d(0.0, -1.0),
+                                     new Translation2d(0.0, -2.0)),
+                                new Pose2d(0.0, -3.0, new Rotation2d()), config);
 
                 // eightBallAutoPartTwo = new Trajectory(
                 // new SimplePathBuilder(new Vector2(468.0, -67.34), Rotation2.ZERO)
@@ -181,14 +185,14 @@ public class AutonomousTrajectories {
         }
 
         // private Path getPath(String name) throws IOException {
-        //         InputStream in = getClass().getClassLoader().getResourceAsStream(name);
-        //         if (in == null) {
-        //                 throw new FileNotFoundException("Path file not found: " + name);
-        //         }
+        // InputStream in = getClass().getClassLoader().getResourceAsStream(name);
+        // if (in == null) {
+        // throw new FileNotFoundException("Path file not found: " + name);
+        // }
 
-        //         try (PathReader reader = new PathReader(new InputStreamReader(in))) {
-        //                 return reader.read();
-        //         }
+        // try (PathReader reader = new PathReader(new InputStreamReader(in))) {
+        // return reader.read();
+        // }
         // }
 
         public Trajectory farLeftAutoPartOne() {
@@ -199,5 +203,9 @@ public class AutonomousTrajectories {
                 return farLeftAutoPartTwo;
         }
 
-        
+        public Trajectory twoMetersBack() {
+                return twoMetersBack;
+        }
+
+
 }

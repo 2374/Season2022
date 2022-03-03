@@ -173,6 +173,10 @@ public void executeAutoCommands(){
     return m_shooterSubsystem;
   }
 
+  public TurretSubsystem getTurretSubsystem(){
+    return m_turretSubsystem;
+  }
+
   public IndexerSubsystem getIndexerSubsystem(){
     return m_indexerSubsystem;
   }
