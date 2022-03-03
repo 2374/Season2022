@@ -34,7 +34,7 @@ public class TurretSubsystem extends SubsystemBase {
      */
     public void rotateLeft() {
         spinnerMotor.set(-Constants.TURRET_POWER);
-        System.out.println("Rotating Left");
+        // System.out.println("Rotating Left");
     }
 
     /**
@@ -42,7 +42,7 @@ public class TurretSubsystem extends SubsystemBase {
      */
     public void rotateRight() {
         spinnerMotor.set(Constants.TURRET_POWER);
-        System.out.println("Rotating Right");
+        // System.out.println("Rotating Right");
     }
 
     /**
@@ -50,7 +50,7 @@ public class TurretSubsystem extends SubsystemBase {
      */
     public void rotateStop() {
         stop();
-        System.out.println("Stopping");
+        // System.out.println("Stopping");
     }
     /**
      * Find the rotation amount to center the turret
@@ -63,19 +63,24 @@ public class TurretSubsystem extends SubsystemBase {
         Limelight.setLedMode(LightMode.eOn);
         limelight.updateTracking();
         long sTime1 = System.currentTimeMillis();
-        while (limelight.hasValidTarget() && sTime1 + 1000 > System.currentTimeMillis()) {
-            limelight.updateTracking();
+        // System.out.println("Target Valid="+limelight.hasValidTarget());
+        while (limelight.hasValidTarget() ){//&& sTime1 + 1000 > System.currentTimeMillis()) {
+            // System.out.println("TURN VALUE="+limelight.getTurnValue());
             if (limelight.getTurnValue() > Constants.LIMELIGHT_TOLERANCE) {
                 spinnerMotor.set(0.15);
             } else if (limelight.getTurnValue() < -Constants.LIMELIGHT_TOLERANCE) {
                 spinnerMotor.set(-0.15);
             } else {
                 spinnerMotor.set(0.0);
+                limelight.updateTracking();
+                break;
                 // retrun;
             }
+            limelight.updateTracking();
+            
         }
-        System.out.println("time");
-        //Limelight.setLedMode(LightMode.eOff);
+        // System.out.println("time");
+        // Limelight.setLedMode(LightMode.eOff);
     }
 
     /**

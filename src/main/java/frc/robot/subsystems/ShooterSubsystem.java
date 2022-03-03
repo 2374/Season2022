@@ -1,11 +1,12 @@
 package frc.robot.subsystems;
-// import java.util.concurrent.TimeUnit;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.Constants;
 import frc.robot.vision.Limelight;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.util.datalog.DoubleArrayLogEntry;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -15,11 +16,10 @@ public class ShooterSubsystem extends SubsystemBase {
     private WPI_TalonFX topMotor;
     private WPI_TalonFX bottomMotor;
 
-    private MotorControllerGroup indexGroup;
     private MotorControllerGroup mainGroup;
 
-    // private DigitalInput intake = new DigitalInput(0);
-    // private DigitalInput shooter = new DigitalInput(1);
+    private DigitalInput intake = new DigitalInput(0);
+    private DigitalInput shooter = new DigitalInput(1);
 
     private ShooterSubsystem instance;
     private double power;
@@ -35,7 +35,6 @@ public class ShooterSubsystem extends SubsystemBase {
         rightMotor.setInverted(true);
         leftMotor.follow(rightMotor);   
 
-        indexGroup = new MotorControllerGroup(topMotor, bottomMotor);
         mainGroup = new MotorControllerGroup(rightMotor, leftMotor);
     }
 
@@ -49,18 +48,57 @@ public class ShooterSubsystem extends SubsystemBase {
 
     //control classes
 
-    public void shootBallAtCurrentAcquiredTarget() {
-        power = -.2;
-        if (limelight.isLockedOn()) {
-            double d = limelight.calculateDistance();
-            System.out.println("TARGET DIST=" + d);
-            power = -19.6 * Math.pow(d, 2) / (d * 1.73205080757 - 2.4384);
-            System.out.println("power=" + power);
+    public void shootBallAtCurrentAcquiredTarget(Boolean ignoreTracking) {
+        power = 0.0;
+        // double velocity;
+        System.out.println("locked?="+limelight.isLockedOn());
+        limelight.updateTracking();
+        if (!ignoreTracking && limelight.isLockedOn()) {
+            // double d = limelight.calculateDistance()/100;
+            // System.out.println("TARGET DIST=" + d);
+            // velocity = Math.sqrt(19.6 * Math.pow(d, 2) / (d * 1.73205080757 - (limelight.getDifferenceDistanceCM()/100)));
+            // System.out.println("Velocity=" + velocity);
+            // double RPM = velocity/0.05/0.10472;
+            // System.out.println("RPM=" + RPM);
+            // power = RPM/6380;
+            // System.out.println("power=" + power);
+            double distanceCm = limelight.calculateDistance();
+            System.out.println("Distance="+distanceCm);
+            if (distanceCm > 0.0) {
+                if (distanceCm <= 250) {
+                    power = 0.6;
+                } else if (distanceCm > 250 && distanceCm < 280 ) {
+                    power = .7;
+                } else if (distanceCm >= 280 && distanceCm < 310 ) {
+                    power = .80;
+                } else if (distanceCm >= 310 && distanceCm < 370 ) {
+                    power = .85;
+                } else if (distanceCm >= 370 && distanceCm < 430 ) {
+                    power = .88;
+                } else if (distanceCm >= 430 && distanceCm < 460 ) {
+                    power = 1.0;
+                } else if (distanceCm >= 460 && distanceCm < 500 ) {
+                    power = 1.0;
+                } else if (distanceCm >= 500 && distanceCm < 550 ) {
+                    power = 1.0;
+                } else {
+                    power = 1.0;
+                }
+            }
+        } else {
+            // default shot is assuming about 8'
+            power = .7;
         }
-        mainGroup.set(power);
+        System.out.println("POWER="+power);
+        mainGroup.set(-1 * power); // motors run in the negative direction so return a negative number
+    }
+
+    public void dribble(){
+        mainGroup.set(-.4);
     }
 
     public void stop(){
+        System.out.println("STOP SHOOTER MOTOR");
         mainGroup.set(0);
     }
     
@@ -70,19 +108,27 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void indexerOn(){
         // System.out.println("index on");
-        indexGroup.set(0.2);
+        topMotor.set(0.1);
+        bottomMotor.set(0.1);
+    }
+
+    public void indexerRev(){
+        // System.out.println("index on");
+        topMotor.set(-0.3);
+        bottomMotor.set(-0.3);
     }
 
     public void indexerOff(){
         // System.out.println("index off");
-        indexGroup.set(0);
+        topMotor.set(0.0);
+        bottomMotor.set(0.0);
     }
 
     public boolean getIntakeSensor(){
-        return false;//intake.get();
+        return intake.get();
     }
 
     public boolean getShooterSensor(){
-        return false;//shooter.get();
+        return shooter.get();
     }
 }

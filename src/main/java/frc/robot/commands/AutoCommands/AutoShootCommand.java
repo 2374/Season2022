@@ -26,7 +26,7 @@ public class AutoShootCommand extends CommandBase{
      */
     @Override
     public void execute() {
-        m_shooterSubsystem.shootBallAtCurrentAcquiredTarget();
+        m_shooterSubsystem.shootBallAtCurrentAcquiredTarget(false);
     
     }
 

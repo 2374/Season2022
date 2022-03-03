@@ -6,9 +6,8 @@ import frc.robot.subsystems.ShooterSubsystem;
 /**
  * Fire a ball at an acquired target using a shooter subsystem
  */
-public class ShootCommand extends CommandBase{
+public class DribbleCommand extends CommandBase{
     private final ShooterSubsystem m_shooterSubsystem;
-    private Boolean justShoot = false;
 
     /** 
      * Assuming a given shooter is aligned to the target and
@@ -16,9 +15,8 @@ public class ShootCommand extends CommandBase{
      * fire the ball at the target using the ball.
      * @param shooterSubsystem
      */
-    public ShootCommand(ShooterSubsystem shooterSubsystem, Boolean justShoot) {
+    public DribbleCommand(ShooterSubsystem shooterSubsystem) {
         this.m_shooterSubsystem = shooterSubsystem;
-        this.justShoot = justShoot;
         addRequirements(shooterSubsystem);
     }
 
@@ -28,7 +26,7 @@ public class ShootCommand extends CommandBase{
      */
     @Override
     public void execute() {
-        m_shooterSubsystem.shootBallAtCurrentAcquiredTarget(justShoot);
+        m_shooterSubsystem.dribble();
     }
 
     

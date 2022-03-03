@@ -12,9 +12,9 @@ public class Limelight {
     private double verticalTargetAngle = 0.0;
     private double horizontalTargetAngle = 0.0;
 
-    static final double LIMELIGHT_HEIGHT_CM = 60.0; // h1
-    static final double TARGET_HEIGHT_CM = 171.0; // h2
-    static final double LIMELIGHT_MOUNTING_ANGLE = 60; // a1
+    static final double LIMELIGHT_HEIGHT_CM = 85.1; // h1
+    static final double TARGET_HEIGHT_CM = 261.6; // h2
+    static final double LIMELIGHT_MOUNTING_ANGLE = 35.5; // a1
      // These numbers must be tuned for your Robot!  Be careful!
     static final double STEER_K = 0.03;                    // how hard to turn toward the target
     static final double DRIVE_K = 0.26;                    // how hard to drive fwd toward the target
@@ -34,8 +34,6 @@ public class Limelight {
 	}
 
     public void updateTracking() {
-
-       
         
         // for horizontal alignment limelight pipeline 1 is the ball, pipeline two is the hatch 
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0); // change the setNumber to the appropriate target
@@ -48,7 +46,7 @@ public class Limelight {
             hasValidTarget = false;
             throttleValue = 0.0;
             turnValue = 0.0;
-            verticalTargetAngle = 0.0;
+            // verticalTargetAngle = 0.0;   don't set the angle of the target to zero????
             return;
         }
 
@@ -59,29 +57,24 @@ public class Limelight {
         turnValue = steer_cmd;
         verticalTargetAngle = ty;
         horizontalTargetAngle = tx;
-  
-        // // try to drive forward until the target area reaches our desired area
-        // // This should be replaced by LIDAR call
-        // double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
-
-        // // don't let the robot drive too fast into the goal
-        // if (drive_cmd > MAX_DRIVE)
-        // {
-        //     drive_cmd = MAX_DRIVE;
-        // }
-        // throttleValue = drive_cmd;
 
     }
 
     public double calculateDistance() {
+		updateTracking();
         double distance = 0.0;
-
+		// System.out.println(this.getVerticalTargetAngle());
         double differenceDistance = TARGET_HEIGHT_CM - LIMELIGHT_HEIGHT_CM;
-        double denom = Math.tan(Math.toRadians(LIMELIGHT_MOUNTING_ANGLE + this.getVerticalTargetAngle()));
+		double shooterAngle = LIMELIGHT_MOUNTING_ANGLE + this.getVerticalTargetAngle();
+		// System.out.println("Shooter Angle="+shooterAngle);
+        double denom = Math.tan(Math.toRadians(shooterAngle));
         distance = differenceDistance / denom;
-        
+        //  System.out.println(denom);
+		//  System.out.println(differenceDistance);
         return distance;
     }
+
+	public double getDifferenceDistanceCM() { return TARGET_HEIGHT_CM - LIMELIGHT_HEIGHT_CM; }
 
     public double getVerticalTargetAngle() { return this.verticalTargetAngle; }
 
@@ -94,7 +87,8 @@ public class Limelight {
     public double getTurnValue() { return turnValue; }
 
     public boolean isLockedOn() {
-        return (Math.abs(getHorizontalTargetAngle()) < Constants.LIMELIGHT_TOLERANCE);
+		// System.out.println("Locked ON Angle="+getHorizontalTargetAngle());
+        return (Math.abs(getHorizontalTargetAngle()) < Constants.LIMELIGHT_TOLERANCE*30);
     }
 
     /**
