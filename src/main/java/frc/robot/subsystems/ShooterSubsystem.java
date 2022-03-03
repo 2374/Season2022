@@ -89,8 +89,9 @@ public class ShooterSubsystem extends SubsystemBase {
             // default shot is assuming about 8'
             power = .7;
         }
-        System.out.println("POWER="+power);
+        // System.out.println("POWER="+power);
         mainGroup.set(-1 * power); // motors run in the negative direction so return a negative number
+    
     }
 
     public void dribble(){
@@ -108,8 +109,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void indexerOn(){
         // System.out.println("index on");
-        topMotor.set(0.1);
-        bottomMotor.set(0.1);
+        topMotor.set(0.5);
+        bottomMotor.set(0.5);
     }
 
     public void indexerRev(){
