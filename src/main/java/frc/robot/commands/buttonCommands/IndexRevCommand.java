@@ -1,21 +1,21 @@
 package frc.robot.commands.buttonCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 
 /**
  * Turn on the indexer for the shooter
  */
 public class IndexRevCommand extends CommandBase{
-    private final ShooterSubsystem m_shooterSubsystem;
+    private final IndexerSubsystem m_indexerSubsystem;
 
     /** 
      * Turn on the indexer for a given shooter subsystem for the length of
      * the command.
-     * @param shooterSubsystem Which shooter subsystem should the indexer be engaged for?
+     * @param indexerSubsystem Which shooter subsystem should the indexer be engaged for?
      */
-    public IndexRevCommand(ShooterSubsystem shooterSubsystem) {
-        this.m_shooterSubsystem = shooterSubsystem;
+    public IndexRevCommand(IndexerSubsystem shooterSubsystem) {
+        this.m_indexerSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
     }
 
@@ -24,7 +24,7 @@ public class IndexRevCommand extends CommandBase{
      */
     @Override
     public void execute() {
-        m_shooterSubsystem.indexerRev();
+        m_indexerSubsystem.indexerRev();
     }
 
     
@@ -34,6 +34,6 @@ public class IndexRevCommand extends CommandBase{
      */
     @Override
     public void end(boolean interrupted) {
-        m_shooterSubsystem.indexerOff();
+        m_indexerSubsystem.indexerOff();
     }
 }

@@ -62,7 +62,7 @@ public class TurretSubsystem extends SubsystemBase {
     public void spinToTarget() {
         Limelight.setLedMode(LightMode.eOn);
         limelight.updateTracking();
-        long sTime1 = System.currentTimeMillis();
+        // long sTime1 = System.currentTimeMillis();
         // System.out.println("Target Valid="+limelight.hasValidTarget());
         while (limelight.hasValidTarget() ){//&& sTime1 + 1000 > System.currentTimeMillis()) {
             // System.out.println("TURN VALUE="+limelight.getTurnValue());
@@ -72,7 +72,6 @@ public class TurretSubsystem extends SubsystemBase {
                 spinnerMotor.set(-0.15);
             } else {
                 spinnerMotor.set(0.0);
-                limelight.updateTracking();
                 break;
                 // retrun;
             }

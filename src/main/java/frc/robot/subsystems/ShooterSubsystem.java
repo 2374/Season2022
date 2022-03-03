@@ -4,22 +4,16 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.Constants;
 import frc.robot.vision.Limelight;
+import frc.robot.vision.Limelight.LightMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.util.datalog.DoubleArrayLogEntry;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class ShooterSubsystem extends SubsystemBase {
     private WPI_TalonFX leftMotor;
     private WPI_TalonFX rightMotor;
     private Limelight limelight;
-    private WPI_TalonFX topMotor;
-    private WPI_TalonFX bottomMotor;
-
+    
     private MotorControllerGroup mainGroup;
-
-    private DigitalInput intake = new DigitalInput(0);
-    private DigitalInput shooter = new DigitalInput(1);
 
     private ShooterSubsystem instance;
     private double power;
@@ -29,8 +23,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
         leftMotor = new WPI_TalonFX(Constants.LEFT_SHOOTER, Constants.CANIVORE_CAN_BUS_NAME);
         rightMotor = new WPI_TalonFX(Constants.RIGHT_SHOOTER, Constants.CANIVORE_CAN_BUS_NAME);
-        topMotor = new WPI_TalonFX(Constants.TOP_INDEX_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
-        bottomMotor = new WPI_TalonFX(Constants.BOTTOM_INDEX_MOTOR, Constants.CANIVORE_CAN_BUS_NAME);
         
         rightMotor.setInverted(true);
         leftMotor.follow(rightMotor);   
@@ -48,6 +40,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
     //control classes
 
+    /**
+     * Shoot the ball using the current values from the limeligth to track the
+     * target distance.
+     * 
+     * @param ignoreTracking just shoot the ball at 70% power
+     */
     public void shootBallAtCurrentAcquiredTarget(Boolean ignoreTracking) {
         power = 0.0;
         // double velocity;
@@ -99,37 +97,12 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void stop(){
-        System.out.println("STOP SHOOTER MOTOR");
         mainGroup.set(0);
+        Limelight.setLedMode(LightMode.eOff); // can't turn off the limelight until shooting is done
     }
     
     public double getPower(){
         return power;
     }
 
-    public void indexerOn(){
-        // System.out.println("index on");
-        topMotor.set(0.5);
-        bottomMotor.set(0.5);
-    }
-
-    public void indexerRev(){
-        // System.out.println("index on");
-        topMotor.set(-0.3);
-        bottomMotor.set(-0.3);
-    }
-
-    public void indexerOff(){
-        // System.out.println("index off");
-        topMotor.set(0.0);
-        bottomMotor.set(0.0);
-    }
-
-    public boolean getIntakeSensor(){
-        return intake.get();
-    }
-
-    public boolean getShooterSensor(){
-        return shooter.get();
-    }
 }

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 /**
@@ -33,6 +34,7 @@ public class RobotContainer {
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
+  private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
 
   private static XboxController m_controller = new XboxController(Constants.XBOX_CONTROLLER_PORT);
   private static XboxController m_ord = new XboxController(Constants.XBOX_2_CONTROLLER_PORT); //at the speed of gene
@@ -86,8 +88,8 @@ public class RobotContainer {
     new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_BUMPER_ID).whenHeld(new SpinToTargetCommand(m_turretSubsystem));
     //Intake
     new JoystickButton(m_ord, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new IntakeOnCommand(m_intakeSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new IndexOnCommand(m_shooterSubsystem));
-    new JoystickButton(m_controller, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new IndexRevCommand(m_shooterSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new IndexOnCommand(m_indexerSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new IndexRevCommand(m_indexerSubsystem));
     new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenPressed(new RetractIntakeCommand(m_intakeSubsystem));
     new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenPressed(new ExtendIntakeCommand(m_intakeSubsystem));
     //Shooter
@@ -169,6 +171,10 @@ public void executeAutoCommands(){
 
   public ShooterSubsystem getShooterSubsystem(){
     return m_shooterSubsystem;
+  }
+
+  public IndexerSubsystem getIndexerSubsystem(){
+    return m_indexerSubsystem;
   }
 
   public ClimberSubsystem getClimberSubsystem(){

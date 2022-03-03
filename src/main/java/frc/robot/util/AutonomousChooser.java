@@ -105,8 +105,8 @@ public class AutonomousChooser {
 
     private void AutoShootCommand(SequentialCommandGroup command, RobotContainer container, double timeToWait) {
         command.addCommands((new AutoShootCommand(container.getShooterSubsystem())).alongWith(
-            (new WaitCommand(0.5)).andThen(new AutoIndexOnCommand(container.getShooterSubsystem()))
-            .andThen(new WaitCommand(timeToWait)).andThen(new AutoIndexOffCommand(container.getShooterSubsystem())).
+            (new WaitCommand(0.5)).andThen(new AutoIndexOnCommand(container.getIndexerSubsystem()))
+            .andThen(new WaitCommand(timeToWait)).andThen(new AutoIndexOffCommand(container.getIndexerSubsystem())).
             andThen(new AutoShootStopCommand(container.getShooterSubsystem()))));
     }
 
