@@ -133,7 +133,7 @@ public class AutonomousChooser {
 
     private void shootAtTarget(SequentialCommandGroup command, RobotContainer container, double timeToWait) {
         command.addCommands(
-                new ShootCommand(container.getShooterSubsystem(), container.getTurretSubsystem(), container.getIndexerSubsystem(), false).withTimeout(timeToWait));
+                new NewShootCommand(container.getShooterSubsystem(), container.getTurretSubsystem(), container.getIndexerSubsystem(), false).withTimeout(timeToWait));
     }
 
     private void followTrajectory(SequentialCommandGroup command, RobotContainer container, Trajectory trajectory) {

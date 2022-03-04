@@ -8,7 +8,7 @@ import frc.robot.subsystems.TurretSubsystem;
 /**
  * Fire a ball at an acquired target using a combination of turret/indexer/shooter subsystems
  */
-public class ShootCommand extends ParallelRaceGroup{
+public class NewShootCommand extends ParallelRaceGroup{
     /** 
      * Assuming a given shooter is close to being aligned to the target and
      * a ball is ready to be shot, instruct the turret to align and the shooter to
@@ -18,14 +18,14 @@ public class ShootCommand extends ParallelRaceGroup{
      * @param indexerSubsystem
      * @param justShootDontAlign
      */
-    public ShootCommand(ShooterSubsystem shooterSubsystem, TurretSubsystem turretSubsystem, IndexerSubsystem indexerSubsystem,
+    public NewShootCommand(ShooterSubsystem shooterSubsystem, TurretSubsystem turretSubsystem, IndexerSubsystem indexerSubsystem,
             boolean justShootDontAlign) {
         if (justShootDontAlign) {
             addCommands(
                     // start the shooting
                     new StartShooterCommand(shooterSubsystem, justShootDontAlign), // should run until interrupted
                     // Feed balls into shooter and then stop
-                    new ShootProcessCommand(shooterSubsystem, indexerSubsystem));
+                    new ShootProcessCommand(indexerSubsystem));
         } else {
             addCommands(
                     // start the auto tracking
@@ -33,7 +33,7 @@ public class ShootCommand extends ParallelRaceGroup{
                     // start the shooting
                     new StartShooterCommand(shooterSubsystem, justShootDontAlign), // should run until interrupted
                     // Feed balls into shooter and then stop
-                    new ShootProcessCommand(shooterSubsystem, indexerSubsystem));
+                    new ShootProcessCommand(indexerSubsystem));
         }
     }
 }

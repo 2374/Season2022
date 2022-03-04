@@ -8,6 +8,8 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.vision.Limelight;
+import frc.robot.vision.Limelight.LightMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -35,6 +37,7 @@ public class Robot extends TimedRobot {
     // UsbCamera climberCamera = CameraServer.startAutomaticCapture("Climber Camera", 1);
     // I think this will automatically start a camera streaming to the smart dashboard
     CameraServer.startAutomaticCapture("Driver Camera", 0);
+    Limelight.setLedMode(LightMode.eOff);
   }
 
   /**

@@ -81,28 +81,29 @@ public class RobotContainer {
 
     //Drive
     new JoystickButton(m_controller, Constants.CONTROLLER_BACK_BUTTON_ID).whenPressed(new GyroResetCommand(m_drivetrainSubsystem));
-    new JoystickButton(m_controller, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenHeld(new TurboModeOnCommand(m_drivetrainSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_LEFT_BUMPER_ID).whenHeld(new TurboModeOnCommand(m_drivetrainSubsystem));
     //Turret
     new JoystickButton(m_ord, Constants.CONTROLLER_BACK_BUTTON_ID).whenHeld(new RotateLeftCommand(m_turretSubsystem));
     new JoystickButton(m_ord, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new RotateRightCommand(m_turretSubsystem));
     new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_BUMPER_ID).whenHeld(new SpinToTargetCommand(m_turretSubsystem));
     //Intake
-    new JoystickButton(m_ord, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new IntakeOnCommand(m_intakeSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new IndexOnCommand(m_indexerSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenHeld(new IntakeOnCommand(m_intakeSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new IndexOnCommand(m_indexerSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new IndexRevCommand(m_indexerSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenPressed(new RetractIntakeCommand(m_intakeSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenPressed(new ExtendIntakeCommand(m_intakeSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_X_BUTTON_ID).whenPressed(new RetractIntakeCommand(m_intakeSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_B_BUTTON_ID).whenPressed(new ExtendIntakeCommand(m_intakeSubsystem));
     //Shooter
+    // new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenPressed(new NewShootCommand(m_shooterSubsystem, m_turretSubsystem, m_indexerSubsystem, false));
     new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenPressed(new ShootCommand(m_shooterSubsystem, false));
     // new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenReleased(new ShootCommand(m_shooterSubsystem, false));
     // new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_BUMPER_ID).whenHeld(new ShootCommand(m_shooterSubsystem, true));
     new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_JOYSTICK_BUTTON_ID).whenPressed(new DribbleCommand(m_shooterSubsystem));
     new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_JOYSTICK_BUTTON_ID).whenPressed(new ShootStopCommand(m_shooterSubsystem));
     //Climber
-    new JoystickButton(m_controller, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new ExtendFixedArmsCommand(m_climberSubsystem));
-    new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new RetractFixedArmsCommand(m_climberSubsystem));
-    new JoystickButton(m_controller, Constants.CONTROLLER_X_BUTTON_ID).whenHeld(new UnDeployFixedArmsCommand(m_climberSubsystem));
-    new JoystickButton(m_controller, Constants.CONTROLLER_B_BUTTON_ID).whenHeld(new DeployFixedArmsCommand(m_climberSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new ExtendFixedArmsCommand(m_climberSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new RetractFixedArmsCommand(m_climberSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenHeld(new UnDeployFixedArmsCommand(m_climberSubsystem));
+    new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenHeld(new DeployFixedArmsCommand(m_climberSubsystem));
     // climber manual overrides
     // new JoystickButton(m_ord, Constants.).whileActiveContinuous((new ManualAdjustClimberCommand(m_climberSubsystem));
     
@@ -148,7 +149,7 @@ public void executeAutoCommands(){
 
   private double modifyAxis(double value) {
     // Deadband
-    value = deadband(value, 0.05);
+    value = deadband(value, 0.1);
 
     // Square the axis
     value = Math.copySign(value * value, value);
