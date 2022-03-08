@@ -54,9 +54,9 @@ public class AutonomousChooser {
         SequentialCommandGroup command = new SequentialCommandGroup();
 
         // just move back 2 meters and shoot
-
+        
         followTrajectory(command, container, trajectories.twoMetersBack());
-        shootAtTarget(command, container, 10);
+        // shootAtTarget(command, container, 10);
         
         return command;
     }

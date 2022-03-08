@@ -90,6 +90,7 @@ public class RobotContainer {
     new JoystickButton(m_controller, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenHeld(new IntakeOnCommand(m_intakeSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new IndexOnCommand(m_indexerSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new IndexRevCommand(m_indexerSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new IntakeRevCommand(m_intakeSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_X_BUTTON_ID).whenPressed(new RetractIntakeCommand(m_intakeSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_B_BUTTON_ID).whenPressed(new ExtendIntakeCommand(m_intakeSubsystem));
     //Shooter

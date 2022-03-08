@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.vision.Limelight;
-import frc.robot.vision.Limelight.LightMode;
 
 // Does whatever a spider can
 
@@ -44,8 +42,8 @@ public class ClimberSubsystem extends SubsystemBase {
         leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_LEFT_ARM, Constants.REVERSE_CHANNEL_LEFT_ARM);
         rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_RIGHT_ARM, Constants.REVERSE_CHANNEL_RIGHT_ARM);
         
-        leftPiston.set(DoubleSolenoid.Value.kOff);
-        rightPiston.set(DoubleSolenoid.Value.kOff);
+        leftPiston.set(DoubleSolenoid.Value.kForward);
+        rightPiston.set(DoubleSolenoid.Value.kReverse);
 
         fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
         // articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
@@ -62,12 +60,12 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void deployFixedArms(){
-        leftPiston.set(DoubleSolenoid.Value.kForward);
+        leftPiston.set(DoubleSolenoid.Value.kReverse);
         rightPiston.set(DoubleSolenoid.Value.kForward);
     }
 
     public void undeployFixedArms(){
-        leftPiston.set(DoubleSolenoid.Value.kReverse);
+        leftPiston.set(DoubleSolenoid.Value.kForward);
         rightPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
@@ -76,10 +74,10 @@ public class ClimberSubsystem extends SubsystemBase {
         // if (rightFixed.getSelectedSensorPosition() <= Constants.FIXED_ARM_UPPER_LIMIT){
         //     rightFixed.set(0.4);
         // } else {
-            fixedGroup.set(0.6);
+            fixedGroup.set(1);
             
         // }
-        Limelight.setLedMode(LightMode.eOff);
+        
     }
 
     public void retractFixedArms(){
@@ -87,7 +85,7 @@ public class ClimberSubsystem extends SubsystemBase {
         // if (rightFixed.getSelectedSensorPosition() >= Constants.FIXED_ARM_LOWER_LIMIT) {
         //     rightFixed.set(-1.0);
         // } else {
-            fixedGroup.set(-0.60);
+            fixedGroup.set(-1);
         // }
     }
 
@@ -140,10 +138,10 @@ public class ClimberSubsystem extends SubsystemBase {
     
     
     // moves articulating arms forward
-    public void angleArticulatingArms() {
-        leftPiston.set(DoubleSolenoid.Value.kForward);
-        rightPiston.set(DoubleSolenoid.Value.kForward);
-    }
+    // public void angleArticulatingArms() {
+    //     leftPiston.set(DoubleSolenoid.Value.kReverse);
+    //     rightPiston.set(DoubleSolenoid.Value.kForward);
+    // }
 
     // // moves articulating arms in reverse
     // public void reverseArticulatingArms() {

@@ -42,7 +42,7 @@ public final class Constants {
 
     public static final int DRIVETRAIN_PIGEON_ID = 0; // NAV Set Pigeon ID
 
-    public static final String CANIVORE_CAN_BUS_NAME = "FastFD";
+    public static final String CANIVORE_CAN_BUS_NAME = "FastFD"; // TEMP
     public static final String RIO_CAN_BUS_NAME = "rio";
     public static final String DRIVETRAIN_CAN_BUS_NAME = CANIVORE_CAN_BUS_NAME;
 

@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.Constants;
 import frc.robot.vision.Limelight;
-import frc.robot.vision.Limelight.LightMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
@@ -58,34 +57,25 @@ public class ShooterSubsystem extends SubsystemBase {
             // System.out.println("Velocity=" + velocity);
             // double RPM = velocity/0.05/0.10472;
             // System.out.println("RPM=" + RPM);
-            // power = RPM/6380;
+            // power = 2.1*RPM/6380;
             // System.out.println("power=" + power);
             double distanceCm = limelight.calculateDistance();
             System.out.println("Distance="+distanceCm);
             if (distanceCm > 0.0) {
                 if (distanceCm <= 250) {
-                    power = 0.6;
+                    power = 0.8;
                 } else if (distanceCm > 250 && distanceCm < 280 ) {
-                    power = .7;
-                } else if (distanceCm >= 280 && distanceCm < 310 ) {
-                    power = .80;
-                } else if (distanceCm >= 310 && distanceCm < 370 ) {
                     power = .85;
-                } else if (distanceCm >= 370 && distanceCm < 430 ) {
-                    power = .88;
-                } else if (distanceCm >= 430 && distanceCm < 460 ) {
+                } else if (distanceCm >= 280 && distanceCm < 310 ) {
+                    power = .9;
+                } else  {
                     power = 1.0;
-                } else if (distanceCm >= 460 && distanceCm < 500 ) {
-                    power = 1.0;
-                } else if (distanceCm >= 500 && distanceCm < 550 ) {
-                    power = 1.0;
-                } else {
-                    power = 1.0;
-                }
+                } 
+                
             }
         } else {
             // default shot is assuming about 8'
-            power = .7;
+            power = .8;
         }
         // System.out.println("POWER="+power);
         mainGroup.set(-1 * power); // motors run in the negative direction so return a negative number
@@ -98,7 +88,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void stop(){
         mainGroup.set(0);
-        Limelight.setLedMode(LightMode.eOff); // can't turn off the limelight until shooting is done
+        //Limelight.setLedMode(LightMode.eOff); // can't turn off the limelight until shooting is done
     }
     
     public double getPower(){

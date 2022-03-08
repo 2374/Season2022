@@ -51,4 +51,8 @@ public class IntakeSubsystem extends SubsystemBase {
         rightPiston.set(DoubleSolenoid.Value.kForward);
     }
 
+    public void intakeRev() {
+        motor.set(-0.6);
+    }
+
 }
