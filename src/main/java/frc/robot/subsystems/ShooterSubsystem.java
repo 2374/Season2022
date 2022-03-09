@@ -11,6 +11,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private WPI_TalonFX leftMotor;
     private WPI_TalonFX rightMotor;
     private Limelight limelight;
+    private double motorPowerAdjustmentValue = 1.0;
     
     private MotorControllerGroup mainGroup;
 
@@ -88,7 +89,7 @@ public class ShooterSubsystem extends SubsystemBase {
             // default shot is assuming about 8'
             power = 0.78;        }
         // System.out.println("POWER="+power);
-        mainGroup.set(-1 * power); // motors run in the negative direction so return a negative number
+        mainGroup.set(-1 * Math.min(1.0, power * motorPowerAdjustmentValue)); // motors run in the negative direction so return a negative number
     
     }
 
@@ -102,7 +103,17 @@ public class ShooterSubsystem extends SubsystemBase {
     }
     
     public double getPower(){
-        return power;
+        return Math.min(1.0, power * motorPowerAdjustmentValue);
     }
+
+    public void increasePower() {
+        if (motorPowerAdjustmentValue < 1.0 ) 
+            motorPowerAdjustmentValue += 0.01; 
+    }
+    public void decreasePower() {
+        if (motorPowerAdjustmentValue > 0.0 ) {
+            motorPowerAdjustmentValue -= 0.01;
+        }
+     }
 
 }
