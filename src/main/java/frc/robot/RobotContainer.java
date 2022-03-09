@@ -68,7 +68,7 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
-  }
+  } 
 
   
   /**
@@ -106,8 +106,9 @@ public class RobotContainer {
     new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenHeld(new UnDeployFixedArmsCommand(m_climberSubsystem));
     new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenHeld(new DeployFixedArmsCommand(m_climberSubsystem));
     // climber manual overrides
-    // new JoystickButton(m_ord, Constants.).whileActiveContinuous((new ManualAdjustClimberCommand(m_climberSubsystem));
     
+    // new JoystickButton(m_ord, Constants.).whileActiveContinuous((new ManualAdjustClimberCommand(m_climberSubsystem));
+  
     // new Button(m_ord::getAButtonPressed).whenPressed(m_turretSubsystem::spinToTarget);
     // new Button(m_ord::getRightBumperPressed).whenPressed(m_shooterSubsystem::shoot);
     // new Button(m_ord::getRightBumperReleased).whenReleased(m_shooterSubsystem::stop);

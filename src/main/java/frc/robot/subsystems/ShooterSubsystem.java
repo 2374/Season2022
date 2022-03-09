@@ -60,6 +60,7 @@ public class ShooterSubsystem extends SubsystemBase {
             // power = 2.1*RPM/6380;
             // System.out.println("power=" + power);
             double distanceCm = limelight.calculateDistance();
+            distanceCm = 455;
             System.out.println("Distance="+distanceCm);
             if (distanceCm > 0.0) {
                 if (distanceCm <= 250) {
@@ -68,15 +69,24 @@ public class ShooterSubsystem extends SubsystemBase {
                     power = .85;
                 } else if (distanceCm >= 280 && distanceCm < 310 ) {
                     power = .9;
-                } else  {
+                } else if (distanceCm >= 320 && distanceCm <= 350) {
+                    power = .775;
+                } else if (distanceCm > 350 && distanceCm <= 380) {
+                    power = .805;
+                } else if (distanceCm > 380 && distanceCm <= 410) {
+                    power = .845;
+                } else if (distanceCm > 410 && distanceCm <= 440) {
+                    power = .895;
+                } else if (distanceCm > 440 && distanceCm <= 470) {
+                    power = .955;
+                } else {
                     power = 1.0;
-                } 
+                }
                 
             }
         } else {
             // default shot is assuming about 8'
-            power = .8;
-        }
+            power = 0.78;        }
         // System.out.println("POWER="+power);
         mainGroup.set(-1 * power); // motors run in the negative direction so return a negative number
     

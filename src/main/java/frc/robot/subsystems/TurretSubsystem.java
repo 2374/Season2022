@@ -5,7 +5,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.vision.Limelight;
-import frc.robot.vision.Limelight.LightMode;
 
 public class TurretSubsystem extends SubsystemBase {
     private WPI_TalonFX spinnerMotor;
@@ -60,11 +59,10 @@ public class TurretSubsystem extends SubsystemBase {
      * that we are aligned to the target
      */
     public void spinToTarget() {
-        Limelight.setLedMode(LightMode.eOn);
         limelight.updateTracking();
         // long sTime1 = System.currentTimeMillis();
         // System.out.println("Target Valid="+limelight.hasValidTarget());
-        while (limelight.hasValidTarget() ){//&& sTime1 + 1000 > System.currentTimeMillis()) {
+        while (limelight.hasValidTarget()){//&& sTime1 + 1000 > System.currentTimeMillis()) {
             // System.out.println("TURN VALUE="+limelight.getTurnValue());
             if (limelight.getTurnValue() > Constants.LIMELIGHT_TOLERANCE) {
                 spinnerMotor.set(0.15);

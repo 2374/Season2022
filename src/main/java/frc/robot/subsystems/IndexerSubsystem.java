@@ -50,8 +50,8 @@ public class IndexerSubsystem extends SubsystemBase {
     }
     
     public void indexerOn(){
-        topMotor.set(0.5);
-        bottomMotor.set(0.5);
+        topMotor.set(0.3);
+        bottomMotor.set(0.3);
     }
 
     public void indexerRev(){
