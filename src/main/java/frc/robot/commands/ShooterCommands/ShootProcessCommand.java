@@ -1,6 +1,7 @@
 package frc.robot.commands.ShooterCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.IndexerSubsystem;
 // import frc.robot.subsystems.ShooterSubsystem;
 
@@ -31,7 +32,8 @@ public class ShootProcessCommand extends SequentialCommandGroup {
     public ShootProcessCommand(IndexerSubsystem indexerSubsystem) {
         addCommands(
             // Wait until shooter has spun up completely THIS SHOULD CHANGE TO SOME INTERLOCK FROM THE SHOOTER that says "GOOD to FEED"
-            new DelayXSecondsCommand(2),
+            //new DelayXSecondsCommand(2),
+            new WaitCommand(1),
             // Feed Balls until indexer is empty
             new FeedBallsCommand(indexerSubsystem)
         );

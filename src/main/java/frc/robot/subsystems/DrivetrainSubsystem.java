@@ -214,6 +214,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
                 TurboMode = false;
         }
 
+        public void toggleTurboMode() {
+                TurboMode = !TurboMode;         
+        }
+
         public Boolean getTurboMode() {
                 return TurboMode;
         }

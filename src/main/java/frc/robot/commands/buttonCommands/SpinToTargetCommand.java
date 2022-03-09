@@ -2,6 +2,8 @@ package frc.robot.commands.buttonCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.vision.Limelight;
+import frc.robot.vision.Limelight.LightMode;
 
 /**
  * Spin the turrent to align to the target for the shooter
@@ -16,6 +18,7 @@ public class SpinToTargetCommand extends CommandBase {
      * @param turretSubsystem the turret to align on target
      */
     public SpinToTargetCommand(TurretSubsystem turretSubsystem) {
+        Limelight.setLedMode(LightMode.eOn);
         this.m_turretSubsystem = turretSubsystem;
         addRequirements(turretSubsystem);
     }
