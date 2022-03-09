@@ -2,6 +2,7 @@ package frc.robot.commands.ShooterCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.buttonCommands.IndexOnCommand;
 import frc.robot.subsystems.IndexerSubsystem;
 // import frc.robot.subsystems.ShooterSubsystem;
 
@@ -17,25 +18,12 @@ public class ShootProcessCommand extends SequentialCommandGroup {
      * to the shooter until empty and then stop the shooter
      * @param shooterSubsystem the shooter to fire at target
      */
-    // public ShootProcessCommand(ShooterSubsystem shooterSubsystem, IndexerSubsystem indexerSubsystem) {
-    //     addRequirements(shooterSubsystem);
-    //     addCommands(
-    //         // Wait until shooter has spun up completely THIS SHOULD CHANGE TO SOME INTERLOCK FROM THE SHOOTER that says "GOOD to FEED"
-    //         new DelayXSecondsCommand(2),
-    //         // Feed Balls until indexer is empty
-    //         new FeedBallsCommand(indexerSubsystem)
-    //         // Stop Shooter this should cause the ShootCommand group to terminate
-    //         //new StopShooterCommand(shooterSubsystem) // this should happen automatically when the FeedBallsCommand finishes it will exit the command group
-    //     );
-    // }
-
     public ShootProcessCommand(IndexerSubsystem indexerSubsystem) {
         addCommands(
             // Wait until shooter has spun up completely THIS SHOULD CHANGE TO SOME INTERLOCK FROM THE SHOOTER that says "GOOD to FEED"
-            //new DelayXSecondsCommand(2),
-            new WaitCommand(1),
-            // Feed Balls until indexer is empty
-            new FeedBallsCommand(indexerSubsystem)
+            new WaitCommand(2.0),
+            new IndexOnCommand(indexerSubsystem).until(indexerSubsystem.intakeSensorsSeeNoBalls),
+            new WaitCommand(1.5)
         );
     }
 

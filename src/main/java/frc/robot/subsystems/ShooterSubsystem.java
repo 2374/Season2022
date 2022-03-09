@@ -48,7 +48,7 @@ public class ShooterSubsystem extends SubsystemBase {
     public void shootBallAtCurrentAcquiredTarget(Boolean ignoreTracking) {
         power = 0.0;
         // double velocity;
-        System.out.println("locked?="+limelight.isLockedOn());
+        // System.out.println("locked?="+limelight.isLockedOn());
         limelight.updateTracking();
         if (!ignoreTracking && limelight.isLockedOn()) {
             // double d = limelight.calculateDistance()/100;
@@ -61,7 +61,7 @@ public class ShooterSubsystem extends SubsystemBase {
             // System.out.println("power=" + power);
             double distanceCm = limelight.calculateDistance();
             distanceCm = 455;
-            System.out.println("Distance="+distanceCm);
+            // System.out.println("Distance="+distanceCm);
             if (distanceCm > 0.0) {
                 if (distanceCm <= 250) {
                     power = 0.8;

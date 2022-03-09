@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.function.BooleanSupplier;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.Constants;
@@ -33,15 +35,16 @@ public class IndexerSubsystem extends SubsystemBase {
         indexerOn();
         // is either sensor set then there is work to do
         do {
+            System.out.println("SENDING THE BALLS "+intakeSensorNoBall()+" "+shooterSensorNoBall());
             // wait 2 seconds before testing both sensors again
             // this should give the ball enough time to clear the system
             try {
                 wait(1000);
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 // Auto-generated catch block
-                e.printStackTrace();
+                // being interrupted is a good thing means we are done. e.printStackTrace();
             }
-        } while (getIntakeSensor() || getShooterSensor());
+        } while (intakeSensorNoBall() || shooterSensorNoBall());
         indexerOff();
     }
     
@@ -65,11 +68,13 @@ public class IndexerSubsystem extends SubsystemBase {
         bottomMotor.set(0.0);
     }
 
-    public boolean getIntakeSensor(){
-        return intakeSensor.get();
+    public boolean intakeSensorNoBall(){
+        return intakeSensor.get(); 
     }
 
-    public boolean getShooterSensor(){
+    public boolean shooterSensorNoBall(){
         return shooterSensor.get();
     }
+
+    public BooleanSupplier intakeSensorsSeeNoBalls = () -> (shooterSensorNoBall() && intakeSensorNoBall());
 }

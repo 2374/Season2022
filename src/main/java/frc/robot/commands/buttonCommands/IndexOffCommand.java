@@ -6,7 +6,7 @@ import frc.robot.subsystems.IndexerSubsystem;
 /**
  * Turn on the indexer for the shooter
  */
-public class IndexOnCommand extends CommandBase{
+public class IndexOffCommand extends CommandBase{
     private final IndexerSubsystem m_indexerSubsystem;
 
     /** 
@@ -14,7 +14,7 @@ public class IndexOnCommand extends CommandBase{
      * the command.
      * @param indexerSubsystem Which shooter subsystem should the indexer be engaged for?
      */
-    public IndexOnCommand(IndexerSubsystem indexerSubsystem) {
+    public IndexOffCommand(IndexerSubsystem indexerSubsystem) {
         this.m_indexerSubsystem = indexerSubsystem;
         addRequirements(indexerSubsystem);
     }
@@ -24,8 +24,9 @@ public class IndexOnCommand extends CommandBase{
      */
     @Override
     public void execute() {
-        m_indexerSubsystem.indexerOn();
-        System.out.println("State="+m_indexerSubsystem.shooterSensorNoBall()+"-"+m_indexerSubsystem.intakeSensorNoBall());
+        m_indexerSubsystem.indexerOff();
+        System.out.println("OFF");
+        cancel();
     }
 
     
@@ -35,6 +36,6 @@ public class IndexOnCommand extends CommandBase{
      */
     @Override
     public void end(boolean interrupted) {
-        m_indexerSubsystem.indexerOff();
+        //m_indexerSubsystem.indexerOff();
     }
 }
