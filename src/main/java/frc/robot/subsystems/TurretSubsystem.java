@@ -4,15 +4,20 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.util.AS5600EncoderPwm;
 import frc.robot.vision.Limelight;
 
 public class TurretSubsystem extends SubsystemBase {
     private WPI_TalonFX spinnerMotor;
     private Limelight limelight = new Limelight();
     private TurretSubsystem instance;
+    // private double currentTickCount = 0;
+    // private final AS5600EncoderPwm encoder = new AS5600EncoderPwm(spinnerMotor.getSensorCollection());
 
     public TurretSubsystem() {
         spinnerMotor = new WPI_TalonFX(Constants.TURRET_MOTOR); // must be on the RIO
+        // currentTickCount = 0;
+       
     }
 
     
@@ -28,11 +33,17 @@ public class TurretSubsystem extends SubsystemBase {
         return instance;
     }
 
+    // public double getCurrentTickCount() {
+    //     return currentTickCount;
+    // }
+
     /**
      * Rotate the turret Left
      */
     public void rotateLeft() {
-        spinnerMotor.set(-Constants.TURRET_POWER);
+        // System.out.println("Left="+spinnerMotor.getSensorCollection().getIntegratedSensorPosition());
+        // if (currentTickCount < 1000 )
+            spinnerMotor.set(-Constants.TURRET_POWER);
         // System.out.println("Rotating Left");
     }
 
@@ -40,7 +51,9 @@ public class TurretSubsystem extends SubsystemBase {
      * Rotate the turret Right
      */
     public void rotateRight() {
-        spinnerMotor.set(Constants.TURRET_POWER);
+        // System.out.println("Right="+spinnerMotor.getSelectedSensorPosition(0));
+        // if (currentTickCount > -1000) 
+            spinnerMotor.set(Constants.TURRET_POWER);
         // System.out.println("Rotating Right");
     }
 
@@ -48,8 +61,10 @@ public class TurretSubsystem extends SubsystemBase {
      * Stop the current rotation of the turret
      */
     public void rotateStop() {
+        // currentTickCount = spinnerMotor.getSelectedSensorPosition(0);
+        //spinnerMotor.
         stop();
-        // System.out.println("Stopping");
+        // System.out.println("Stopping="+currentTickCount);
     }
     /**
      * Find the rotation amount to center the turret

@@ -21,7 +21,7 @@ public class IntakeSubsystem extends SubsystemBase {
         compressor = new Compressor(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM);
         leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_LEFT, Constants.REVERSE_CHANNEL_LEFT);
         rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_RIGHT, Constants.REVERSE_CHANNEL_RIGHT);
-        // TODO uncomment for cometition //compressor.enableDigital();
+        compressor.enableDigital();
     }
     
     public IntakeSubsystem getIntakeInstance() {
