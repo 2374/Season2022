@@ -22,6 +22,7 @@ public class AutonomousChooser {
     private final AutonomousTrajectories trajectories;
 
     private SendableChooser<AutonomousMode> autonomousModeChooser = new SendableChooser<>();
+    
 
     public AutonomousChooser(AutonomousTrajectories trajectories) {
         this.trajectories = trajectories;
@@ -56,7 +57,7 @@ public class AutonomousChooser {
         // just move back 2 meters and shoot
         
         followTrajectory(command, container, trajectories.twoMetersBack());
-        // shootAtTarget(command, container, 10);
+        shootAtTarget(command, container, 10);
         
         return command;
     }
