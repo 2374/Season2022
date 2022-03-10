@@ -99,21 +99,30 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void stop(){
         mainGroup.set(0);
-        //Limelight.setLedMode(LightMode.eOff); // can't turn off the limelight until shooting is done
+        // Limelight.setLedMode(LightMode.eOff); // can't turn off the limelight until
+        // shooting is done
     }
-    
-    public double getPower(){
+
+    public double getPower() {
         return Math.min(1.0, power * motorPowerAdjustmentValue);
     }
 
     public void increasePower() {
-        if (motorPowerAdjustmentValue < 1.0 ) 
-            motorPowerAdjustmentValue += 0.01; 
+        if (motorPowerAdjustmentValue < 1.1)
+            motorPowerAdjustmentValue += 0.01;
+
+            System.out.println("ROSS INC");
     }
+
     public void decreasePower() {
-        if (motorPowerAdjustmentValue > 0.0 ) {
+        if (motorPowerAdjustmentValue > 0.9) {
             motorPowerAdjustmentValue -= 0.01;
         }
-     }
+        System.out.println("ROSS DEC");
+    }
+
+    public double currentPowerAdjustmentValue() {
+        return motorPowerAdjustmentValue;
+    }
 
 }
