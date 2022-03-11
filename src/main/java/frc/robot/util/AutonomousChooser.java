@@ -17,6 +17,7 @@ import frc.robot.RobotContainer;
 import frc.robot.commands.FollowTrajectoryCommand;
 // import frc.robot.commands.AutoCommands.*;
 import frc.robot.commands.ShooterCommands.*;
+import frc.robot.commands.buttonCommands.RotateLeftCommand;
 
 public class AutonomousChooser {
     private final AutonomousTrajectories trajectories;
@@ -56,6 +57,7 @@ public class AutonomousChooser {
 
         // just move back 2 meters and shoot
         
+        freeClimber(command, container);
         followTrajectory(command, container, trajectories.twoMetersBack());
         shootAtTarget(command, container, 10);
         
@@ -139,6 +141,10 @@ public class AutonomousChooser {
 
     private void followTrajectory(SequentialCommandGroup command, RobotContainer container, Trajectory trajectory) {
         command.addCommands(new FollowTrajectoryCommand(container.getDrivetrainSubsystem(), trajectory).getCommand());
+    }
+
+    private void freeClimber(SequentialCommandGroup command, RobotContainer container) {
+        command.addCommands(new FreeClimberCommand(container.getTurretSubsystem()));
     }
 
     // private void follow(SequentialCommandGroup command, RobotContainer container, Trajectory trajectory) {

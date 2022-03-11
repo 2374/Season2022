@@ -61,15 +61,17 @@ public class ShooterSubsystem extends SubsystemBase {
             // power = 2.1*RPM/6380;
             // System.out.println("power=" + power);
             double distanceCm = limelight.calculateDistance();
-            distanceCm = 455;
-            // System.out.println("Distance="+distanceCm);
+            System.out.println("Distance="+distanceCm);
             if (distanceCm > 0.0) {
-                if (distanceCm <= 250) {
-                    power = 0.8;
-                } else if (distanceCm > 250 && distanceCm < 280 ) {
-                    power = .85;
-                } else if (distanceCm >= 280 && distanceCm < 310 ) {
-                    power = .9;
+                if (distanceCm <= 210) {
+                    power = 0.4; // to close shouldn't even fire
+                } else if (distanceCm >= 210 && distanceCm <= 260) {
+                    power = .62;
+                } else if (distanceCm >= 260 && distanceCm <= 290) {
+                    power = .65;
+                } else if (distanceCm >= 290 && distanceCm <= 320) {
+                    power = .70;
+                    // below here may fire short
                 } else if (distanceCm >= 320 && distanceCm <= 350) {
                     power = .775;
                 } else if (distanceCm > 350 && distanceCm <= 380) {
@@ -103,24 +105,25 @@ public class ShooterSubsystem extends SubsystemBase {
         // shooting is done
     }
 
+    // What is the real adjusted power of the shooter (1.0 is max)
     public double getPower() {
         return Math.min(1.0, power * motorPowerAdjustmentValue);
     }
 
+    // Increases the shooter power by 1%
     public void increasePower() {
         if (motorPowerAdjustmentValue < 1.1)
             motorPowerAdjustmentValue += 0.01;
-
-            System.out.println("ROSS INC");
     }
 
+    // Decreases the shooter power by 1%
     public void decreasePower() {
         if (motorPowerAdjustmentValue > 0.9) {
             motorPowerAdjustmentValue -= 0.01;
         }
-        System.out.println("ROSS DEC");
     }
 
+    // What is the current percentage adjustment to power 1.0 == 100%
     public double currentPowerAdjustmentValue() {
         return motorPowerAdjustmentValue;
     }
