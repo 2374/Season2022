@@ -8,13 +8,9 @@ import java.io.IOException;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DefaultDriveCommand;
-import frc.robot.commands.ShooterCommands.DecreaseShooterSpeedCommand;
-import frc.robot.commands.ShooterCommands.IncreaseShooterSpeedCommand;
 import frc.robot.commands.ShooterCommands.NewShootCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -51,6 +47,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    
     try {
       autonomousTrajectories = new AutonomousTrajectories(DrivetrainSubsystem.TRAJECTORY_CONSTRAINTS);
     } catch (IOException e) {
@@ -72,10 +69,6 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
-
-    // SmartDashboard.putData("INCREASE Shooter", new IncreaseShooterSpeedCommand(m_shooterSubsystem));
-    // SmartDashboard.putNumber("Shooter Power",m_shooterSubsystem.currentPowerAdjustmentValue());
-    // SmartDashboard.putData("DECREASE Shooter", new DecreaseShooterSpeedCommand(m_shooterSubsystem));
   } 
 
   

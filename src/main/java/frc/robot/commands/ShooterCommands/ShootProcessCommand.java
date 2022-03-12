@@ -22,7 +22,8 @@ public class ShootProcessCommand extends SequentialCommandGroup {
         addCommands(
             // Wait until shooter has spun up completely THIS SHOULD CHANGE TO SOME INTERLOCK FROM THE SHOOTER that says "GOOD to FEED"
             new WaitCommand(2.0),
-            new IndexOnCommand(indexerSubsystem).until(indexerSubsystem.intakeSensorsSeeNoBalls),
+            // new IndexOnCommand(indexerSubsystem).until(indexerSubsystem.intakeSensorsSeeNoBalls),
+            new IndexOnCommand(indexerSubsystem).withTimeout(1.5),
             new WaitCommand(1.5)
         );
     }

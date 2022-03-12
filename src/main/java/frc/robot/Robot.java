@@ -4,13 +4,11 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.ShooterCommands.DecreaseShooterSpeedCommand;
-import frc.robot.commands.ShooterCommands.IncreaseShooterSpeedCommand;
+import frc.robot.commands.ShooterCommands.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -38,7 +36,7 @@ public class Robot extends TimedRobot {
     // UsbCamera driverCamera = CameraServer.startAutomaticCapture("Driver Camera", 0);
     // UsbCamera climberCamera = CameraServer.startAutomaticCapture("Climber Camera", 1);
     // I think this will automatically start a camera streaming to the smart dashboard
-    CameraServer.startAutomaticCapture("Driver Camera", 0);
+    // CameraServer.startAutomaticCapture("Driver Camera", 0);
 
     // do some smart dashboard stuff
     SmartDashboard.putData("INCREASE Shooter", new IncreaseShooterSpeedCommand(m_robotContainer.getShooterSubsystem()));
@@ -61,8 +59,11 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    SmartDashboard.putNumber("Shooter Power",m_robotContainer.getShooterSubsystem().currentPowerAdjustmentValue());
-    
+    SmartDashboard.putNumber("Shoot Mod",m_robotContainer.getShooterSubsystem().currentPowerAdjustmentValue());
+    SmartDashboard.putNumber("Shooter Power",m_robotContainer.getShooterSubsystem().getPower());
+    SmartDashboard.putBoolean("Turbo Mode",m_robotContainer.getDrivetrainSubsystem().getTurboMode());
+    SmartDashboard.putNumber("Potential Shooter Power",m_robotContainer.getShooterSubsystem().getPotentialPower());
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
