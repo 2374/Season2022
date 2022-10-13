@@ -56,7 +56,7 @@ public class AutonomousChooser {
 
         // just move back 2 meters and shoot
         
-        freeClimber(command, container);
+        // freeClimber(command, container);
         followTrajectory(command, container, trajectories.twoMetersBack());
         shootAtTarget(command, container, 10);
         
@@ -125,12 +125,12 @@ public class AutonomousChooser {
     // }
 
     // private void shootAtTarget(SequentialCommandGroup command, RobotContainer container, double timeToWait) {
-        // command.addCommands(
-        //         new TargetWithShooterCommand(container.getShooterSubsystem(), container.getVisionSubsystem(), container.getPrimaryController())
-        //                 .alongWith(new VisionRotateToTargetCommand(container.getDrivetrainSubsystem(), container.getVisionSubsystem(), () -> 0.0, () -> 0.0))
-        //                 .alongWith(
-        //                         new WaitCommand(0.1).andThen(new AutonomousFeedCommand(container.getShooterSubsystem(), container.getFeederSubsystem(), container.getVisionSubsystem())))
-        //                 .withTimeout(timeToWait));
+    //     command.addCommands(
+    //             new TargetWithShooterCommand(container.getShooterSubsystem(), container.getVisionSubsystem(), container.getPrimaryController())
+    //                     .alongWith(new VisionRotateToTargetCommand(container.getDrivetrainSubsystem(), container.getVisionSubsystem(), () -> 0.0, () -> 0.0))
+    //                     .alongWith(
+    //                             new WaitCommand(0.1).andThen(new AutonomousFeedCommand(container.getShooterSubsystem(), container.getFeederSubsystem(), container.getVisionSubsystem())))
+    //                     .withTimeout(timeToWait));
     // }
 
     private void shootAtTarget(SequentialCommandGroup command, RobotContainer container, double timeToWait) {

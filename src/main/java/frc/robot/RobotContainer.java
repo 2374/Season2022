@@ -159,9 +159,9 @@ public void executeAutoCommands(){
     
     // TURBO MODE!
     if (m_drivetrainSubsystem != null && m_drivetrainSubsystem.getTurboMode()) {
-      return value;
+      return value*0.5;
     } else {
-      return 0.5*value;
+      return 0.25*value;
     }
   }
 

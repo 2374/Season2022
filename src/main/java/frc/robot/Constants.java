@@ -56,8 +56,8 @@ public final class Constants {
     public static final int FRONT_RIGHT_MODULE_DRIVE_MOTOR = 2; // NAV Set front right drive motor ID
     public static final int FRONT_RIGHT_MODULE_STEER_MOTOR = 12; // NAV Set front right steer motor ID
     public static final int FRONT_RIGHT_MODULE_STEER_ENCODER = 22; // NAV Set front right steer encoder ID
-    public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(261.914062); // NAV Measure and set front right steer offset
-    // public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(35.156179); // SWERVEE // NAV Measure and set front right steer offset
+    // public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(261.914062); // NAV Measure and set front right steer offset
+    public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(35.156179); // SWERVEE // NAV Measure and set front right steer offset
 
 
     public static final int BACK_LEFT_MODULE_DRIVE_MOTOR = 3; // NAV Set back left drive motor ID

@@ -3,8 +3,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+// import edu.wpi.first.wpilibj.DoubleSolenoid;
+// import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -18,8 +18,8 @@ public class ClimberSubsystem extends SubsystemBase {
     // public WPI_TalonFX leftArticulating;
     // public WPI_TalonFX rightArticulating;
 
-    public DoubleSolenoid leftPiston;
-    public DoubleSolenoid rightPiston;
+    // public DoubleSolenoid leftPiston;
+    // public DoubleSolenoid rightPiston;
 
     public MotorControllerGroup fixedGroup;
     // public MotorControllerGroup articulatingGroup;
@@ -39,11 +39,11 @@ public class ClimberSubsystem extends SubsystemBase {
 
         // compressor = new Compressor(Constants.PCM);
     
-        leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_LEFT_ARM, Constants.REVERSE_CHANNEL_LEFT_ARM);
-        rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_RIGHT_ARM, Constants.REVERSE_CHANNEL_RIGHT_ARM);
+        // leftPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_LEFT_ARM, Constants.REVERSE_CHANNEL_LEFT_ARM);
+        // rightPiston = new DoubleSolenoid(Constants.PCM_INTAKE, PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL_RIGHT_ARM, Constants.REVERSE_CHANNEL_RIGHT_ARM);
         
-        leftPiston.set(DoubleSolenoid.Value.kForward);
-        rightPiston.set(DoubleSolenoid.Value.kReverse);
+        // leftPiston.set(DoubleSolenoid.Value.kForward);
+        // rightPiston.set(DoubleSolenoid.Value.kReverse);
 
         fixedGroup = new MotorControllerGroup(leftFixed, rightFixed);
         // articulatingGroup = new MotorControllerGroup(leftArticulating, rightArticulating);
@@ -60,13 +60,13 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void deployFixedArms(){
-        leftPiston.set(DoubleSolenoid.Value.kReverse);
-        rightPiston.set(DoubleSolenoid.Value.kForward);
+        // leftPiston.set(DoubleSolenoid.Value.kReverse);
+        // rightPiston.set(DoubleSolenoid.Value.kForward);
     }
 
     public void undeployFixedArms(){
-        leftPiston.set(DoubleSolenoid.Value.kForward);
-        rightPiston.set(DoubleSolenoid.Value.kReverse);
+        // leftPiston.set(DoubleSolenoid.Value.kForward);
+        // rightPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void extendFixedArms(){
