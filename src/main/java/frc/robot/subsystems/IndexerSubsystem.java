@@ -36,10 +36,10 @@ public class IndexerSubsystem extends SubsystemBase {
         // is either sensor set then there is work to do
         do {
             System.out.println("SENDING THE BALLS "+intakeSensorNoBall()+" "+shooterSensorNoBall());
-            // wait 2 seconds before testing both sensors again
+            // wait 3 seconds before testing both sensors again
             // this should give the ball enough time to clear the system
             try {
-                wait(1000);
+                wait(3000);
             } catch (Exception e) {
                 // Auto-generated catch block
                 // being interrupted is a good thing means we are done. e.printStackTrace();

@@ -87,9 +87,9 @@ public class ShooterSubsystem extends SubsystemBase {
                 }
                 
             }
-        } else {
+        } else {    
             // default shot is assuming about 8'
-            power = 0.78;        }
+            power = 1.0;        }
         // System.out.println("POWER="+power);
         mainGroup.set(-1 * Math.min(1.0, power * motorPowerAdjustmentValue)); // motors run in the negative direction so return a negative number
     

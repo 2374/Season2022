@@ -6,6 +6,7 @@ package frc.robot;
 
 import java.io.IOException;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -38,10 +39,13 @@ public class RobotContainer {
   private final IndexerSubsystem m_indexerSubsystem = new IndexerSubsystem();
 
   private static XboxController m_controller = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-  private static XboxController m_ord = new XboxController(Constants.XBOX_2_CONTROLLER_PORT); //at the speed of gene
+  // private static XboxController m_ord = new XboxController(Constants.XBOX_2_CONTROLLER_PORT); //at the speed of gene
 
   private AutonomousTrajectories autonomousTrajectories;
   private final AutonomousChooser autonomousChooser;
+
+  private final SlewRateLimiter xLimiter = new SlewRateLimiter(.5);
+  private final SlewRateLimiter yLimiter = new SlewRateLimiter(.5);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -62,9 +66,9 @@ public class RobotContainer {
     // Right stick X axis -> rotation
     m_drivetrainSubsystem.setDefaultCommand(new DefaultDriveCommand(
             m_drivetrainSubsystem,
-            () -> -modifyAxis(m_controller.getLeftY()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-            () -> -modifyAxis(m_controller.getLeftX()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-            () -> -modifyAxis(m_controller.getRightX()) * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND
+            () -> -yLimiter.calculate(modifyAxis(m_controller.getLeftY())) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+            () -> -xLimiter.calculate(modifyAxis(m_controller.getLeftX())) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+            () -> -m_controller.getRightX() * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND / 4.0
     ));
 
     // Configure the button bindings
@@ -84,28 +88,25 @@ public class RobotContainer {
     new JoystickButton(m_controller, Constants.CONTROLLER_BACK_BUTTON_ID).whenPressed(new GyroResetCommand(m_drivetrainSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_LEFT_BUMPER_ID).whenPressed(new TurboModeToggleCommand(m_drivetrainSubsystem));
     //Turret
-    new JoystickButton(m_ord, Constants.CONTROLLER_BACK_BUTTON_ID).whenHeld(new RotateLeftCommand(m_turretSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new RotateRightCommand(m_turretSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_BUMPER_ID).whenHeld(new SpinToTargetCommand(m_turretSubsystem));
+    // new JoystickButton(m_ord, Constants.CONTROLLER_BACK_BUTTON_ID).whenHeld(new RotateLeftCommand(m_turretSubsystem));
+    // new JoystickButton(m_ord, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new RotateRightCommand(m_turretSubsystem));
+    // new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_BUMPER_ID).whenHeld(new SpinToTargetCommand(m_turretSubsystem));
     //Intake
-    new JoystickButton(m_controller, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenHeld(new IntakeOnCommand(m_intakeSubsystem));
+    // new JoystickButton(m_controller, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenHeld(new IntakeOnCommand(m_intakeSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new IndexOnCommand(m_indexerSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new IndexRevCommand(m_indexerSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_START_BUTTON_ID).whenHeld(new IntakeRevCommand(m_intakeSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_X_BUTTON_ID).whenPressed(new RetractIntakeCommand(m_intakeSubsystem));
     new JoystickButton(m_controller, Constants.CONTROLLER_B_BUTTON_ID).whenPressed(new ExtendIntakeCommand(m_intakeSubsystem));
     //Shooter
-    new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenPressed(new NewShootCommand(m_shooterSubsystem, m_turretSubsystem, m_indexerSubsystem, false));
-    // new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenPressed(new ShootCommand(m_shooterSubsystem, false));
-    // new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenReleased(new ShootCommand(m_shooterSubsystem, false));
-    // new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_BUMPER_ID).whenHeld(new ShootCommand(m_shooterSubsystem, true));
-    new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_JOYSTICK_BUTTON_ID).whenPressed(new DribbleCommand(m_shooterSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_JOYSTICK_BUTTON_ID).whenPressed(new ShootStopCommand(m_shooterSubsystem));
+    new JoystickButton(m_controller, Constants.CONTROLLER_RIGHT_BUMPER_ID).whenPressed(new NewShootCommand(m_shooterSubsystem, m_turretSubsystem, m_indexerSubsystem, false));
+    // new JoystickButton(m_ord, Constants.CONTROLLER_RIGHT_JOYSTICK_BUTTON_ID).whenPressed(new DribbleCommand(m_shooterSubsystem));
+    // new JoystickButton(m_ord, Constants.CONTROLLER_LEFT_JOYSTICK_BUTTON_ID).whenPressed(new ShootStopCommand(m_shooterSubsystem));
     //Climber
-    new JoystickButton(m_ord, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new ExtendFixedArmsCommand(m_climberSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new RetractFixedArmsCommand(m_climberSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenHeld(new UnDeployFixedArmsCommand(m_climberSubsystem));
-    new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenHeld(new DeployFixedArmsCommand(m_climberSubsystem));
+    // new JoystickButton(m_ord, Constants.CONTROLLER_Y_BUTTON_ID).whenHeld(new ExtendFixedArmsCommand(m_climberSubsystem));
+    // new JoystickButton(m_ord, Constants.CONTROLLER_A_BUTTON_ID).whenHeld(new RetractFixedArmsCommand(m_climberSubsystem));
+    // new JoystickButton(m_ord, Constants.CONTROLLER_X_BUTTON_ID).whenHeld(new UnDeployFixedArmsCommand(m_climberSubsystem));
+    // new JoystickButton(m_ord, Constants.CONTROLLER_B_BUTTON_ID).whenHeld(new DeployFixedArmsCommand(m_climberSubsystem));
     // climber manual overrides
     
     // new JoystickButton(m_ord, Constants.).whileActiveContinuous((new ManualAdjustClimberCommand(m_climberSubsystem));
@@ -158,10 +159,10 @@ public void executeAutoCommands(){
     value = Math.copySign(value * value, value);
     
     // TURBO MODE!
-    if (m_drivetrainSubsystem != null && m_drivetrainSubsystem.getTurboMode()) {
-      return value*0.5;
+    if (m_drivetrainSubsystem.getTurboMode() && m_drivetrainSubsystem != null) {
+      return value*0.4;
     } else {
-      return 0.25*value;
+      return 0.2*value;
     }
   }
 

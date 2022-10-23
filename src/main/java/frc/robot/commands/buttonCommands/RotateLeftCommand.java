@@ -22,7 +22,7 @@ public class RotateLeftCommand extends CommandBase{
      * Start moving the turret to the Left
      */
     @Override
-    public void execute() {
+    public void execute() { 
         m_turretSubsystem.rotateLeft();
     }
 

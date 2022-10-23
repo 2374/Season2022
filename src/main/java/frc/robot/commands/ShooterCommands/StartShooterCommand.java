@@ -27,7 +27,7 @@ public class StartShooterCommand extends CommandBase{
      * assume the target is locked.
      */
     @Override
-    public void execute() {
+    public void initialize() {
         m_shooterSubsystem.shootBallAtCurrentAcquiredTarget(m_justShootDontAlign); // this will start the shooter at the desired speed
     }
 

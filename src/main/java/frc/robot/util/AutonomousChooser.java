@@ -142,9 +142,9 @@ public class AutonomousChooser {
         command.addCommands(new FollowTrajectoryCommand(container.getDrivetrainSubsystem(), trajectory).getCommand());
     }
 
-    private void freeClimber(SequentialCommandGroup command, RobotContainer container) {
-        command.addCommands(new FreeClimberCommand(container.getTurretSubsystem()));
-    }
+    // private void freeClimber(SequentialCommandGroup command, RobotContainer container) {
+    //     command.addCommands(new FreeClimberCommand(container.getTurretSubsystem()));
+    // }
 
     // private void follow(SequentialCommandGroup command, RobotContainer container, Trajectory trajectory) {
     //     // System.out.println("ROSS="+container.getDrivetrainSubsystem());
