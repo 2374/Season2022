@@ -23,7 +23,7 @@ public class IndexOnCommand extends CommandBase{
      * Turn on the indexer for the shooter subsystem
      */
     @Override
-    public void execute() {
+    public void initialize() {
         m_indexerSubsystem.indexerOn();
         System.out.println("State="+m_indexerSubsystem.shooterSensorNoBall()+"-"+m_indexerSubsystem.intakeSensorNoBall());
     }
