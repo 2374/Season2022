@@ -23,7 +23,7 @@ public class IntakeRevCommand extends CommandBase{
      * Turn on the indexer for the shooter subsystem
      */
     @Override
-    public void execute() {
+    public void initialize() {
         m_intakeSubsystem.intakeRev();
     }
 

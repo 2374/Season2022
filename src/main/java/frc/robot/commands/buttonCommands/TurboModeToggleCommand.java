@@ -23,7 +23,7 @@ public class TurboModeToggleCommand extends CommandBase{
      * While the command is running, enable the Turbo Mode
      */
     @Override
-    public void execute() { 
+    public void initialize() { 
         m_drivetrainSubsystem.toggleTurboMode();
         System.out.println("TURBO MODE TOGGLE");
     }

@@ -20,7 +20,7 @@ public class RetractIntakeCommand extends CommandBase{
      * Turn on the indexer for the Intake subsystem
      */
     @Override
-    public void execute() {
+    public void initialize() {
         m_intakeSubsystem.retractPistons();
     }
 

@@ -20,7 +20,7 @@ public class ExtendIntakeCommand extends CommandBase{
      * Turn on the intake for the Intake subsystem
      */
     @Override
-    public void execute() {
+    public void initialize() {
         m_intakeSubsystem.extendPistons();
     }
 
